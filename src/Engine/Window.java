@@ -36,9 +36,6 @@ public class Window {
         glfwSwapInterval(1); // Enable v-sync
         glfwShowWindow(window);
 
-        // setup OpenGL
-        GL.createCapabilities();
-
         created = true;
     }
 
