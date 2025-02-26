@@ -51,6 +51,12 @@ public class Window {
         glfwPollEvents();
     }
 
+    public static boolean GetKey(int key) {
+        if(!created)
+            throw new IllegalStateException("Window is not created, Cannot Get Key.");
+        return glfwGetKey(window, key) == GLFW_PRESS;
+    }
+
     public static void Destroy()
     {
         // destroy window
