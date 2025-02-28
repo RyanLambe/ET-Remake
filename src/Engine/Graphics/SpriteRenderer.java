@@ -48,6 +48,7 @@ public class SpriteRenderer implements Renderer {
         // update transform uniform
 
         // update texture?
+        universalShader.SetUniform("transform", transform.getMatrix());
 
         // render sprite
         GL30.glBindVertexArray(vao);

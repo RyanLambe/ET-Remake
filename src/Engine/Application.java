@@ -16,15 +16,20 @@ public class Application {
         Graphics.Start();
         Game.Start();
 
+        for(Entity entity : entities){
+            entity.Start();
+        }
+
         while(!Window.ShouldClose()){
             // Physics Update
-            // Game Update
+
+            for(Entity entity : entities){
+                entity.Update();
+            }
 
             Clock.CalculateDeltaTime();
-
             Graphics.Render();
             Window.Update();
-
         }
 
         Window.Destroy();

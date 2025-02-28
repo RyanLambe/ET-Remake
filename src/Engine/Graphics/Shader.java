@@ -1,10 +1,12 @@
 package Engine.Graphics;
 
-import org.joml.Vector3f;
+import org.joml.*;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
+import java.nio.FloatBuffer;
 import java.nio.file.*;
 
 public class Shader {
@@ -54,5 +56,13 @@ public class Shader {
     public void SetUniform(String name, Vector3f vector){
         int location = GL20.glGetUniformLocation(program, name);
         GL20.glUniform3f(location, vector.x, vector.y, vector.z);
+    }
+
+    public void SetUniform(String name, Matrix4f matrix){
+        FloatBuffer fb = BufferUtils.createFloatBuffer(16);
+        matrix.get(fb);
+
+        int location = GL20.glGetUniformLocation(program, name);
+        GL20.glUniformMatrix4fv(location, false, fb);
     }
 }
