@@ -1,7 +1,9 @@
 {
   "build": "release",
   "mode": "zip",
-  "selectedAddons": [],
+  "selectedAddons": [
+    "joml"
+  ],
   "platform": [
     "macos-arm64",
     "windows"
