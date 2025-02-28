@@ -9,8 +9,7 @@ import java.util.ArrayList;
 
 public class Application {
 
-    private static final ArrayList<Entity> entities = new ArrayList<Entity>();
-    private static int nextEntityID = 1;
+    private static final ArrayList<Entity> entities = new ArrayList<>();
 
     public static void main(String[] args) {
         Window.Create();
