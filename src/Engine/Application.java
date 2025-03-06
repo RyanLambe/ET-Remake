@@ -12,7 +12,7 @@ public class Application {
     private static final ArrayList<Entity> entities = new ArrayList<>();
 
     public static void main(String[] args) {
-        Window.Create();
+        Window.Create("ET Remake", 1280, 720);
         Graphics.Start();
         Game.Start();
 
