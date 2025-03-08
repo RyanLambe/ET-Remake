@@ -1,6 +1,7 @@
 package Game;
 
 import Engine.Clock;
+import Engine.Entities.Entity;
 import Engine.Entities.SpriteEntity;
 import Engine.Input;
 import org.joml.Vector3f;
@@ -10,13 +11,13 @@ public class Player extends SpriteEntity {
 
     @Override
     public void Start() {
-        // DO NOT super.Start()
+        // super.Start() is Unnecessary
         GetSpriteRenderer().SetColor(new Vector3f(0, 1, 0));
     }
 
     @Override
     public void Update() {
-        // DO NOT super.Update()
+        // super.Update() is Unnecessary
         if(Input.GetKey('W'))
             transform.Translate(0, Clock.DeltaTime(), 0);
         if(Input.GetKey('S'))
@@ -35,5 +36,10 @@ public class Player extends SpriteEntity {
             transform.Scale(1 + Clock.DeltaTime());
         if(Input.GetKey('F'))
             transform.Scale(1 - Clock.DeltaTime());
+    }
+
+    @Override
+    public void OnCollision(Entity other) {
+        // super.OnCollision() is Unnecessary
     }
 }

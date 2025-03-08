@@ -2,10 +2,12 @@ package Engine.Entities;
 
 import Engine.Application;
 import Engine.Graphics.Renderer;
+import Engine.Physics.Collider;
 
 public class Entity {
 
     public Transform transform = new Transform();
+    public Collider collider = new Collider();
     public Renderer renderer = null;
 
     public void Setup(){
@@ -17,6 +19,10 @@ public class Entity {
     }
 
     public void Update(){
+
+    }
+
+    public void OnCollision(Entity other) {
 
     }
 
