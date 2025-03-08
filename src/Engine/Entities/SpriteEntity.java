@@ -8,14 +8,6 @@ public class SpriteEntity extends Entity {
         renderer = new SpriteRenderer();
     }
 
-    public void Start() {
-        System.out.println("Error: Function Not Implemented: SpriteEntity.Start");
-    }
-
-    public void Update() {
-        System.out.println("Error: Function Not Implemented: SpriteEntity.Update");
-    }
-
     public SpriteRenderer GetSpriteRenderer(){
         return (SpriteRenderer)renderer;
     }

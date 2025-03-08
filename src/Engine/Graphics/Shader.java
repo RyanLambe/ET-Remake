@@ -11,7 +11,7 @@ import java.nio.file.*;
 
 public class Shader {
 
-    private int program;
+    private final int program;
 
     public Shader(String vertex, String fragment) throws IOException {
         //load vertex shader
@@ -51,6 +51,11 @@ public class Shader {
 
     public void Destroy(){
         GL20.glDeleteProgram(program);
+    }
+
+    public void SetUniform(String name, float value){
+        int location = GL20.glGetUniformLocation(program, name);
+        GL20.glUniform1f(location, value);
     }
 
     public void SetUniform(String name, Vector3f vector){

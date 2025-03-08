@@ -30,7 +30,7 @@ public class SpriteRenderer implements Renderer {
 
     private static int count = 0;
 
-    private Vector3f color;
+    private Vector3f color = new Vector3f(1, 0, 1);
 
     public SpriteRenderer() {
         if(count == 0){
@@ -39,16 +39,18 @@ public class SpriteRenderer implements Renderer {
         count++;
     }
 
+    public static void PrepRender(){
+        universalShader.SetUniform("camTransform", Camera.transform.GetInverseMatrix());
+        universalShader.SetUniform("projection", Camera.transform.GetProjectionMatrix());
+    }
+
     public void Render(Transform transform) {
         if(transform == null || universalShader == null)
             return;
 
         universalShader.Enable();
-
-        // update transform uniform
-
-        // update texture?
-        universalShader.SetUniform("transform", transform.getMatrix());
+        universalShader.SetUniform("color", color);
+        universalShader.SetUniform("transform", transform.GetMatrix());
 
         // render sprite
         GL30.glBindVertexArray(vao);
@@ -59,7 +61,6 @@ public class SpriteRenderer implements Renderer {
     }
 
     public void SetColor(Vector3f color){
-        universalShader.SetUniform("color", color);
         this.color = color;
     }
 

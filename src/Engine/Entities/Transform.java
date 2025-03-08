@@ -1,12 +1,14 @@
 package Engine.Entities;
 
+import Engine.Graphics.Camera;
+import Engine.Window;
 import org.joml.*;
 
 public class Transform {
 
     public Vector3f position = new Vector3f(0);
     public float rotation = 0;
-    public Vector2f scale = new Vector2f(1);
+    public Vector2f scale = new Vector2f(10);
 
     public void Translate(float x, float y, float z){
         Vector2f xAxis = new Vector2f(1, 0);
@@ -38,14 +40,30 @@ public class Transform {
         scale.y *= multiplier;
     }
 
-    public Matrix4f getMatrix(){
+    public Matrix4f GetMatrix(){
         return new Matrix4f()
-                .translate(position)
+                .translate(position.x, position.y, position.z / Camera.farPlane)
                 .rotate(rotation, 0, 0, 1)
                 .scale(scale.x, scale.y, 1);
     }
 
-    public Matrix4f getInverseMatrix(){
-        return getMatrix();
+    public Matrix4f GetInverseMatrix() {
+        return new Matrix4f()
+                .translate(-position.x, -position.y, -position.z)
+                .rotate(-rotation, 0, 0, 1);
+    }
+
+    public Matrix4f GetProjectionMatrix() {
+        return new Matrix4f().ortho2D(
+                -5 * Window.GetAspectRatioX(), 5 * Window.GetAspectRatioX(),
+                -5 * Window.GetAspectRatioY(), 5 * Window.GetAspectRatioY());
+    }
+
+    public static Vector2f PercentageToUnits(float x, float y){
+        return new Vector2f(10 * x * Window.GetAspectRatioX(), 10 * y * Window.GetAspectRatioY());
+    }
+
+    public static Vector3f PercentageToUnits(float x, float y, float z){
+        return new Vector3f(10 * x * Window.GetAspectRatioX(),  10 * y * Window.GetAspectRatioY(), z);
     }
 }

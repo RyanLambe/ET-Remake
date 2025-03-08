@@ -29,7 +29,7 @@ public class AssetManager {
         return newSprite;
     }
 
-    public static Sprite LoadAnimation(ArrayList<String> paths) {
+    public static Sprite LoadAnimation(String... paths) {
         Sprite newSprite = new Sprite();
 
         for (String path : paths) {
