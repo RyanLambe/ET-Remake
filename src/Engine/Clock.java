@@ -4,6 +4,7 @@ public class Clock {
 
     private static long lastTime = System.nanoTime();
     private static float deltaTime;
+    private static final float globalStartTime = System.nanoTime();
 
     private long startTime;
 
@@ -23,6 +24,10 @@ public class Clock {
     // returns time since last frame in seconds
     public static float DeltaTime(){
         return deltaTime;
+    }
+
+    public static float GetTimeSinceGameStart(){
+        return (System.nanoTime() - globalStartTime) / 1000000000.0f;
     }
 
     public static void CalculateDeltaTime(){
