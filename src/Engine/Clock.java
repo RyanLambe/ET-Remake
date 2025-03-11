@@ -8,7 +8,7 @@ public class Clock {
 
     private long startTime;
 
-    Clock() {
+    public Clock() {
         Reset();
     }
 
