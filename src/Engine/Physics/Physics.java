@@ -13,8 +13,8 @@ public class Physics {
     }
 
     // do we need this?
-    public static Collider CreateCollider(float radius) {
-        Collider newCollider = new Collider(radius);
+    public static Collider CreateCollider() {
+        Collider newCollider = new Collider();
         colliders.add(newCollider);
         return newCollider;
     }
