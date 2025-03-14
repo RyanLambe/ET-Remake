@@ -5,14 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AssetManager {
-    private static ArrayList<Sprite> sprites;
-    private static Map<String, Image> images;
-
-    public AssetManager() {
-        sprites = new ArrayList<>();
-        images = new HashMap<>();
-
-    }
+    private static final ArrayList<Sprite> sprites = new ArrayList<>();
+    private static final Map<String, Image> images = new HashMap<>();
 
     public static Sprite LoadSprite(String path) {
         Sprite newSprite = new Sprite();
@@ -20,9 +14,9 @@ public class AssetManager {
         if (!images.containsKey(path)) {
             Image image = new Image(path);
             images.put(path, image);
-            newSprite.addFrame(image);
+            newSprite.AddFrame(image);
         } else {
-            newSprite.addFrame(images.get(path));
+            newSprite.AddFrame(images.get(path));
         }
 
         sprites.add(newSprite);
@@ -36,9 +30,9 @@ public class AssetManager {
             if (!images.containsKey(path)) {
                 Image image = new Image(path);
                 images.put(path, image);
-                newSprite.addFrame(image);
+                newSprite.AddFrame(image);
             } else {
-                newSprite.addFrame(images.get(path));
+                newSprite.AddFrame(images.get(path));
             }
         }
 

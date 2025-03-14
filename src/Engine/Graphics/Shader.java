@@ -53,6 +53,11 @@ public class Shader {
         GL20.glDeleteProgram(program);
     }
 
+    public void SetUniform(String name, boolean value){
+        int location = GL20.glGetUniformLocation(program, name);
+        GL20.glUniform1i(location, value ? 1 : 0);
+    }
+
     public void SetUniform(String name, float value){
         int location = GL20.glGetUniformLocation(program, name);
         GL20.glUniform1f(location, value);

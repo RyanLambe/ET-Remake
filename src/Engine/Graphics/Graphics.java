@@ -15,7 +15,7 @@ import org.lwjgl.stb.STBImage;
 
 public class Graphics {
 
-    private static int fps;
+    private static float defaultFps = 1;
 
     public static void Start(){
         // setup OpenGL
@@ -37,12 +37,12 @@ public class Graphics {
         }
     }
 
-    public static void SetFPS(int newFps) {
-        fps = newFps;
+    public static void SetDefaultFPS(float newFps) {
+        defaultFps = newFps;
     }
 
-    public static int GetFPS() {
-        return fps;
+    public static float GetDefaultFPS() {
+        return defaultFps;
     }
 
     public static void UpdateFramebufferSize(int width, int height) {
@@ -73,10 +73,6 @@ public class Graphics {
 
         System.out.println("Failed to load texture: " + filePath + ".\n");
         return 0;
-    }
-
-    public static void BindTexture(int textureID){
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
     }
 
 }

@@ -1,5 +1,6 @@
 package Game;
 
+import Engine.AssetManagement.AssetManager;
 import Engine.Clock;
 import Engine.Entities.Entity;
 import Engine.Entities.SpriteEntity;
@@ -12,7 +13,13 @@ public class Player extends SpriteEntity {
     @Override
     public void Start() {
         // super.Start() is Unnecessary
-        GetSpriteRenderer().SetColor(new Vector3f(0, 1, 0));
+
+        GetSpriteRenderer().SetColor(new Vector3f(1, 1, 1)); // sets tint of sprite
+
+        GetSpriteRenderer().sprite = AssetManager.LoadSprite("testImage.png"); // sets image for sprite to use
+        GetSpriteRenderer().sprite = AssetManager.LoadAnimation("testImage.png", "testImage.png", "testImage2.png"); // sets animation for sprite (you can have as many paths as needed, repeating paths is encouraged)
+
+        GetSpriteRenderer().sprite.fps = 1; // default is 1, this is just showing how to change
     }
 
     @Override

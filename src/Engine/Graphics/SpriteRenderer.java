@@ -1,5 +1,6 @@
 package Engine.Graphics;
 
+import Engine.AssetManagement.Sprite;
 import Engine.Entities.Transform;
 
 import org.joml.Vector3f;
@@ -30,7 +31,9 @@ public class SpriteRenderer implements Renderer {
 
     private static int count = 0;
 
-    private Vector3f color = new Vector3f(1, 0, 1);
+    private Vector3f color = new Vector3f(1, 1, 1);
+
+    public Sprite sprite = null;
 
     public SpriteRenderer() {
         if(count == 0){
@@ -40,6 +43,9 @@ public class SpriteRenderer implements Renderer {
     }
 
     public static void PrepRender(){
+        if(universalShader == null)
+            return;
+
         universalShader.SetUniform("camTransform", Camera.transform.GetInverseMatrix());
         universalShader.SetUniform("projection", Camera.transform.GetProjectionMatrix());
     }
@@ -51,6 +57,13 @@ public class SpriteRenderer implements Renderer {
         universalShader.Enable();
         universalShader.SetUniform("color", color);
         universalShader.SetUniform("transform", transform.GetMatrix());
+
+        if(sprite != null){
+            universalShader.SetUniform("useTexture", true);
+            GL11.glBindTexture(GL11.GL_TEXTURE_2D, sprite.GetNextFrame().GetTextureID());
+        }
+        else
+            universalShader.SetUniform("useTexture", false);
 
         // render sprite
         GL30.glBindVertexArray(vao);
