@@ -29,7 +29,7 @@ public class Clock {
         if(playing)
             return;
 
-        startTime += pauseTime - System.nanoTime();
+        startTime += System.nanoTime() - pauseTime;
         playing = true;
     }
 
