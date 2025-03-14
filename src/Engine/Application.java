@@ -1,6 +1,7 @@
 package Engine;
 
 import Engine.Entities.Entity;
+import Engine.Physics.Physics;
 import Game.Game;
 
 import Engine.Graphics.*;
@@ -21,9 +22,8 @@ public class Application {
         }
 
         while(!Window.ShouldClose()){
-            // Physics Update
             Input.Update();
-
+            Physics.Update();
             for(Entity entity : entities){
                 entity.Update();
             }
