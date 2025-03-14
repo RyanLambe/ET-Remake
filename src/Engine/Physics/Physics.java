@@ -6,10 +6,10 @@ import Engine.Entities.Entity;
 import java.util.ArrayList;
 
 public class Physics {
-    private static ArrayList<Collider> colliders;
+    private static ArrayList<Collider> colliders = new ArrayList<>();
 
     public Physics() {
-        colliders = new ArrayList<>();
+
     }
 
     public static Collider CreateCollider() {

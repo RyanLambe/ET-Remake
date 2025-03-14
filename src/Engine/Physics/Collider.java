@@ -4,12 +4,11 @@ import Engine.Entities.Entity;
 
 public class Collider {
 
-    public float radius;
-    public Boolean enabled;
+    public float radius = 5;
+    public Boolean enabled = false;
 
     public Collider() {
-        this.radius = 5;
-        enabled = false;
+
     }
 
     public static Collision DetectCollision(Entity A, Entity B) {
@@ -23,6 +22,10 @@ public class Collider {
         double distance = Math.sqrt((b_x - a_x)*(b_x - a_x) + (b_y - a_y)*(b_y - a_y));
         if (distance <= A.collider.radius + B.collider.radius) {
             collision.hit = true;
+            System.out.println("collision occurred");
+        } else {
+            System.out.println("no collision");
+
         }
         return collision;
     }

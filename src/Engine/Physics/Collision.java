@@ -5,12 +5,11 @@ public class Collision {
     public Entity entityA;
     public Entity entityB;
 
-    public Boolean hit;
+    public Boolean hit = false;
 
     public Collision(Entity entityA, Entity entityB) {
         this.entityA = entityA;
         this.entityB = entityB;
-        hit = false;
     }
 
     public void resolve() {
