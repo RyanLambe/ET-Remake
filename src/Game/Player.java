@@ -6,6 +6,7 @@ import Engine.Entities.Entity;
 import Engine.Entities.SpriteEntity;
 import Engine.Input;
 import org.joml.Vector3f;
+import org.lwjgl.glfw.GLFW;
 
 // currently used for engine testing
 public class Player extends SpriteEntity {
@@ -19,7 +20,7 @@ public class Player extends SpriteEntity {
         GetSpriteRenderer().sprite = AssetManager.LoadSprite("testImage.png"); // sets image for sprite to use
         GetSpriteRenderer().sprite = AssetManager.LoadAnimation("testImage.png", "testImage.png", "testImage2.png"); // sets animation for sprite (you can have as many paths as needed, repeating paths is encouraged)
 
-        GetSpriteRenderer().sprite.fps = 1; // default is 1, this is just showing how to change
+        GetSpriteRenderer().sprite.fps = 2; // default is 1, this is just showing how to change
     }
 
     @Override
@@ -43,6 +44,9 @@ public class Player extends SpriteEntity {
             transform.Scale(1 + Clock.DeltaTime());
         if(Input.GetKey('F'))
             transform.Scale(1 - Clock.DeltaTime());
+
+        if(Input.GetKey(GLFW.GLFW_KEY_SPACE))
+            GetSpriteRenderer().sprite.ToggleAnimation();
     }
 
     @Override

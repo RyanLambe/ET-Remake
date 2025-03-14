@@ -7,6 +7,8 @@ public class Clock {
     private static final float globalStartTime = System.nanoTime();
 
     private long startTime;
+    private boolean playing = true;
+    private long pauseTime;
 
     public Clock() {
         Reset();
@@ -16,9 +18,34 @@ public class Clock {
         startTime = System.nanoTime();
     }
 
+    public void Pause() {
+        if(!playing)
+            return;
+        pauseTime = System.nanoTime();
+        playing = false;
+    }
+
+    public void Resume() {
+        if(playing)
+            return;
+
+        startTime += pauseTime - System.nanoTime();
+        playing = true;
+    }
+
+    public void TogglePlay(){
+        if(playing)
+            Pause();
+        else
+            Resume();
+    }
+
     // returns time since started in seconds
     public float GetTime(){
-        return (System.nanoTime() - startTime) / 1000000000.0f;
+        if(playing)
+            return (System.nanoTime() - startTime) / 1000000000.0f;
+        else
+            return (pauseTime - startTime) / 1000000000.0f;
     }
 
     // returns time since last frame in seconds
