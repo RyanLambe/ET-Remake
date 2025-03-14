@@ -22,6 +22,7 @@ public class Application {
 
         while(!Window.ShouldClose()){
             // Physics Update
+            Input.Update();
 
             for(Entity entity : entities){
                 entity.Update();

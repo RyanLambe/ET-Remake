@@ -45,8 +45,10 @@ public class Player extends SpriteEntity {
         if(Input.GetKey('F'))
             transform.Scale(1 - Clock.DeltaTime());
 
-        if(Input.GetKey(GLFW.GLFW_KEY_SPACE))
+        // will only trigger once at the beginning of a key press (same with GetKeyUp except at the end of the key press)
+        if(Input.GetKeyDown(GLFW.GLFW_KEY_SPACE)){
             GetSpriteRenderer().sprite.ToggleAnimation();
+        }
     }
 
     @Override

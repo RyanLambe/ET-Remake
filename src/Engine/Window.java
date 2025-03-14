@@ -41,6 +41,8 @@ public class Window {
         glfwSetWindowAspectRatio(window, aspectRatioX, aspectRatioY);
         glfwSetWindowSizeCallback(window, (window, width, height) -> Graphics.UpdateFramebufferSize(width, height));
 
+        glfwSetKeyCallback(window, (long window, int key, int scancode, int action, int mods) -> Input.KeyCallback(key));
+
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1); // Enable v-sync
         glfwShowWindow(window);
