@@ -5,9 +5,10 @@ public class Collider {
     public float radius;
     public Boolean enabled;
 
-    public Collider(float radius) {
-        this.radius = radius;
+    public Collider() {
+        this.radius = 5;
         enabled = false;
     }
+
 
 }
