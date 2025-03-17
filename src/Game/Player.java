@@ -11,6 +11,8 @@ import org.lwjgl.glfw.GLFW;
 // currently used for engine testing
 public class Player extends SpriteEntity {
 
+    private float speed = 20;
+
     @Override
     public void Start() {
         // super.Start() is Unnecessary
@@ -27,13 +29,13 @@ public class Player extends SpriteEntity {
     public void Update() {
         // super.Update() is Unnecessary
         if(Input.GetKey('W'))
-            transform.Translate(0, Clock.DeltaTime(), 0);
+            transform.Translate(0, Clock.DeltaTime() * speed, 0);
         if(Input.GetKey('S'))
-            transform.Translate(0, -Clock.DeltaTime(), 0);
+            transform.Translate(0, -Clock.DeltaTime() * speed, 0);
         if(Input.GetKey('D'))
-            transform.Translate(Clock.DeltaTime(), 0, 0);
+            transform.Translate(Clock.DeltaTime() * speed, 0, 0);
         if(Input.GetKey('A'))
-            transform.Translate(-Clock.DeltaTime(), 0, 0);
+            transform.Translate(-Clock.DeltaTime() * speed, 0, 0);
 
         if(Input.GetKey('E'))
             transform.Rotate(Clock.DeltaTime());

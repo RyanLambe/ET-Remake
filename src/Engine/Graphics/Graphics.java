@@ -23,12 +23,19 @@ public class Graphics {
 
         GL11.glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
         GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(GL11.GL_STENCIL_TEST);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
+
+        SpriteRenderer.InitializeStaticValues();
+        TextRenderer.InitializeStaticValues();
     }
 
     public static void Render() {
-        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT | GL11.GL_STENCIL_BUFFER_BIT);
 
         SpriteRenderer.PrepRender();
+        TextRenderer.PrepRender();
 
         ArrayList<Entity> entities = Application.GetEntities();
         for(Entity entity : entities){
@@ -75,4 +82,8 @@ public class Graphics {
         return 0;
     }
 
+    public static void Destroy() {
+        SpriteRenderer.DestroyStaticValues();
+        TextRenderer.DestroyStaticValues();
+    }
 }

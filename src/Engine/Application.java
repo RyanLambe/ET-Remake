@@ -33,6 +33,7 @@ public class Application {
             Window.Update();
         }
 
+        Graphics.Destroy();
         Window.Destroy();
     }
 
