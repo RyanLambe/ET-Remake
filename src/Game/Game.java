@@ -1,11 +1,13 @@
 package Game;
 
+import java.util.HashMap;
+
 import Engine.Application;
 import Engine.Entities.TextEntity;
 
 public class Game {
 
-    public static void Start()
+    /*public static void Start()
     {
         // this is an example, DO NOT use SpriteEntity Directly, SpriteEntity should be inherited from.
         Player example = Application.CreateEntity(new Player());
@@ -17,5 +19,21 @@ public class Game {
         text2.GetTextRenderer().SetText("How's it going?");
         text2.transform.position.y -= 20;
         text2.transform.position.x -= 50;
+        
+    }*/
+ 
+    public static ZoneManager zoneManager;
+    public static Player player;
+
+    public static void Start() {
+        
+        zoneManager = new ZoneManager();
+
+        zoneManager.loadZone("Forest");
+
+        // Player setup
+        Player example = Application.CreateEntity(new Player());
     }
+    
+    public static Player getPlayer() { return player; }
 }
