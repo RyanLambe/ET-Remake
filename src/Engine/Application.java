@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Application {
 
     private static final ArrayList<Entity> entities = new ArrayList<>();
+    private static boolean gameStarted = false;
 
     public static void main(String[] args) {
         Window.Create("ET Remake", 1280, 720);
@@ -21,11 +22,14 @@ public class Application {
             entity.Start();
         }
 
+        gameStarted = true;
         while(!Window.ShouldClose()){
             Input.Update();
             Physics.Update();
-            ArrayList<Entity> entitiesCopy = new ArrayList<>(entities);
-            for (Entity entity : entitiesCopy) {
+
+            // lock the arraylist of entities so that if one is deleted during update it won't break the iterator
+            ArrayList<Entity> lockedEntities = new ArrayList<>(entities);
+            for (Entity entity : lockedEntities) {
                 entity.Update();
             }
 
@@ -42,6 +46,8 @@ public class Application {
     public static <T extends Entity> T CreateEntity(T entity){
         entity.Setup();
         entities.add(entity);
+        if(gameStarted)
+            entity.Start();
         return entity;
     }
 
