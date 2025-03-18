@@ -24,7 +24,8 @@ public class Application {
         while(!Window.ShouldClose()){
             Input.Update();
             Physics.Update();
-            for(Entity entity : entities){
+            ArrayList<Entity> entitiesCopy = new ArrayList<>(entities);
+            for (Entity entity : entitiesCopy) {
                 entity.Update();
             }
 

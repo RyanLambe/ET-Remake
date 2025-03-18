@@ -51,10 +51,36 @@ public class Player extends SpriteEntity {
         if(Input.GetKeyDown(GLFW.GLFW_KEY_SPACE)){
             GetSpriteRenderer().sprite.ToggleAnimation();
         }
+
+        checkZoneTransition();
     }
 
     @Override
     public void OnCollision(Entity other) {
         // super.OnCollision() is Unnecessary
     }
+
+    private void checkZoneTransition() {
+        float x = transform.position.x;
+        float y = transform.position.y;
+
+        if(x > 80){
+            transform.position.x = -60;
+            Game.zoneManager.switchZone("RIGHT");
+        }
+        else if(x < -80){
+            transform.position.x = 60;
+            Game.zoneManager.switchZone("LEFT");
+        }
+
+        if(y > 45){
+            transform.position.y = -35;
+            Game.zoneManager.switchZone("UP");
+        }
+        else if(y < -45){
+            transform.position.y = 35;
+            Game.zoneManager.switchZone("DOWN");
+        }
+    }
+    
 }
