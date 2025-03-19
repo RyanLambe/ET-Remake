@@ -1,8 +1,9 @@
-package Game;
+package Game.Map;
 
 import Engine.Application;
+import Game.ZoneBackground;
 
-public class Zone {
+public abstract class Zone {
     public String name;
     public ZoneBackground background;
     private String imagePath;
@@ -16,11 +17,16 @@ public class Zone {
         if(background != null){
             Application.RemoveEntityInternal(background);
         }
+        removeEntities();
     }
     
     public void load(){
         background = Application.CreateEntity(new ZoneBackground(imagePath));
         System.out.println("Loaded zone: " + name);
+        addEntities(); // Loads zone-specific entities
     }
+
+    public abstract void addEntities();
+    public abstract void removeEntities();
 
 }
