@@ -11,7 +11,7 @@ import org.lwjgl.glfw.GLFW;
 // currently used for engine testing
 public class Player extends SpriteEntity {
 
-    private float speed = 20;
+    private float speed = 50;
 
     @Override
     public void Start() {
