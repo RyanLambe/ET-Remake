@@ -14,6 +14,7 @@ public class Collision {
 
     public void resolve() {
         entityA.OnCollision(entityB);
+        entityB.OnCollision(entityA);
         hit = false;
     }
 }

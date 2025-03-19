@@ -9,6 +9,7 @@ public class Entity {
     public Transform transform = new Transform();
     public Collider collider = new Collider();
     public Renderer renderer = null;
+    public String tag = "";
 
     public void Setup(){
 
