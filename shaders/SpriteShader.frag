@@ -15,4 +15,9 @@ void main(){
         out_Color = texture(ourTexture, TexCoord) * vec4(color, 1);
     else
         out_Color = vec4(color, 1);
+
+
+    // discard is not efficient, but it is not a demanding game so its not worth improving
+    if (out_Color.a < 1)
+        discard;
 }
