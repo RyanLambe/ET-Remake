@@ -1,7 +1,6 @@
 package Game.Map;
 
 import Engine.Application;
-import Game.ZoneBackground;
 
 public abstract class Zone {
     public String name;

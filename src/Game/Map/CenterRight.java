@@ -5,7 +5,7 @@ import Engine.Application;
 public class CenterRight extends Zone {
 
     public CenterRight() {
-        super("CenterRight", "centerRightBG.PNG");
+        super("CenterRight", "centerRightBG.png");
     }
 
     @Override

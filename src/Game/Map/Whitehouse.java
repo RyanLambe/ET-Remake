@@ -5,7 +5,7 @@ import Engine.Application;
 public class Whitehouse extends Zone {
 
     public Whitehouse() {
-        super("Whitehouse", "whitehouse.PNG");
+        super("Whitehouse", "WhitehouseBG.png");
     }
 
     @Override
