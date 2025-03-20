@@ -5,6 +5,7 @@ import java.util.HashMap;
 import Engine.Application;
 import Engine.Entities.TextEntity;
 import Game.Map.ZoneManager;
+import Game.UI.MainMenu;
 
 public class Game {
 
@@ -25,15 +26,28 @@ public class Game {
  
     public static ZoneManager zoneManager;
     public static Player player;
+    private static MainMenu mainMenu;
+    private static boolean gameStarted = false;
 
     public static void Start() {
+        // Show main menu first
+        mainMenu = new MainMenu();
+    }
+    
+    public static void Update() {
+        if (!gameStarted) {
+            mainMenu.Update();
+        }
+    }
+
+    public static void StartGame() {
+        gameStarted = true;
         
         zoneManager = new ZoneManager();
-
         zoneManager.loadZone("Forest");
 
         // Player setup
-        Player example = Application.CreateEntity(new Player());
+        player = Application.CreateEntity(new Player());
     }
     
     public static Player getPlayer() { return player; }

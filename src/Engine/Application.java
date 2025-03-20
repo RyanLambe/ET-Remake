@@ -27,7 +27,10 @@ public class Application {
             Input.Update();
             Physics.Update();
 
-            // lock the arraylist of entities so that if one is deleted during update it won't break the iterator
+            // Update game state
+            Game.Update();
+
+            // Update all entities
             ArrayList<Entity> lockedEntities = new ArrayList<>(entities);
             for (Entity entity : lockedEntities) {
                 entity.Update();
