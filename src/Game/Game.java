@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import Engine.Application;
 import Engine.Entities.TextEntity;
+import Game.Map.ZoneManager;
 
 public class Game {
 
