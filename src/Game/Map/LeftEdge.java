@@ -5,7 +5,7 @@ import Engine.Application;
 public class LeftEdge extends Zone {
 
     public LeftEdge() {
-        super("LeftEdge", "leftedgeBG.PNG");
+        super("LeftEdge", "leftedgeBG.png");
     }
 
     @Override

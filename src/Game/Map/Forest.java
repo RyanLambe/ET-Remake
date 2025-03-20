@@ -5,7 +5,7 @@ import Engine.Application;
 public class Forest extends Zone {
 
     public Forest() {
-        super("Forest", "forest.PNG");
+        super("Forest", "ForestBG.png");
     }
 
     @Override
