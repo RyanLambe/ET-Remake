@@ -1,6 +1,7 @@
 package Game;
 
 import Engine.AssetManagement.AssetManager;
+import Engine.AssetManagement.Sprite;
 import Engine.Clock;
 import Engine.Entities.Entity;
 import Engine.Entities.SpriteEntity;
@@ -11,6 +12,17 @@ import org.lwjgl.glfw.GLFW;
 // currently used for engine testing
 public class Player extends SpriteEntity {
 
+    private Sprite walkLeft = AssetManager.LoadAnimation("ET/Left/0001.png", "ET/Left/0003.png", "ET/Left/0005.png", "ET/Left/0007.png", "ET/Left/0009.png", "ET/Left/0011.png", "ET/Left/0013.png", "ET/Left/0015.png", "ET/Left/0017.png");
+    private Sprite walkRight = AssetManager.LoadAnimation("ET/Right/0001.png", "ET/Right/0003.png", "ET/Right/0005.png", "ET/Right/0007.png", "ET/Right/0009.png", "ET/Right/0011.png", "ET/Right/0013.png", "ET/Right/0015.png", "ET/Right/0017.png");
+    private Sprite walkUp = AssetManager.LoadAnimation("ET/Up/0001.png", "ET/Up/0003.png", "ET/Up/0005.png", "ET/Up/0007.png", "ET/Up/0009.png", "ET/Up/0011.png", "ET/Up/0013.png", "ET/Up/0015.png", "ET/Up/0017.png");
+    private Sprite walkDown = AssetManager.LoadAnimation("ET/Down/0001.png", "ET/Down/0003.png", "ET/Down/0005.png", "ET/Down/0007.png", "ET/Down/0009.png", "ET/Down/0011.png", "ET/Down/0013.png", "ET/Down/0015.png", "ET/Down/0017.png");
+
+    private Sprite idleLeft = AssetManager.LoadSprite("ET/left.png");
+    private Sprite idleRight = AssetManager.LoadSprite("ET/right.png");
+    private Sprite idleUp = AssetManager.LoadSprite("ET/up.png");
+    private Sprite idleDown = AssetManager.LoadSprite("ET/down.png");
+
+
     private float speed = 50;
 
     @Override
@@ -19,10 +31,9 @@ public class Player extends SpriteEntity {
 
         GetSpriteRenderer().SetColor(new Vector3f(1, 1, 1)); // sets tint of sprite
 
-        GetSpriteRenderer().sprite = AssetManager.LoadSprite("testImage.png"); // sets image for sprite to use
-        GetSpriteRenderer().sprite = AssetManager.LoadAnimation("testImage.png", "testImage.png", "testImage2.png"); // sets animation for sprite (you can have as many paths as needed, repeating paths is encouraged)
+        GetSpriteRenderer().sprite = walkLeft;
 
-        GetSpriteRenderer().sprite.fps = 2; // default is 1, this is just showing how to change
+        GetSpriteRenderer().sprite.fps = 5;
     }
 
     @Override
