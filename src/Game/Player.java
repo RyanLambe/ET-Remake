@@ -6,6 +6,7 @@ import Engine.Clock;
 import Engine.Entities.Entity;
 import Engine.Entities.SpriteEntity;
 import Engine.Input;
+import Game.UI.PauseMenu;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
@@ -38,7 +39,10 @@ public class Player extends SpriteEntity {
 
     @Override
     public void Update() {
-        // super.Update() is Unnecessary
+        if (PauseMenu.isPaused) {
+            return;
+        }
+
         if(Input.GetKey('W'))
             transform.Translate(0, Clock.DeltaTime() * speed, 0);
         if(Input.GetKey('S'))

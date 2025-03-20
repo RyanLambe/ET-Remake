@@ -6,6 +6,7 @@ import Engine.Application;
 import Engine.Entities.TextEntity;
 import Game.Map.ZoneManager;
 import Game.UI.MainMenu;
+import Game.UI.PauseMenu;
 
 public class Game {
 
@@ -27,6 +28,7 @@ public class Game {
     public static ZoneManager zoneManager;
     public static Player player;
     private static MainMenu mainMenu;
+    private static PauseMenu pauseMenu;
     private static boolean gameStarted = false;
 
     public static void Start() {
@@ -37,6 +39,9 @@ public class Game {
     public static void Update() {
         if (!gameStarted) {
             mainMenu.Update();
+        } else {
+            // Update pause menu when game is running
+            pauseMenu.Update();
         }
     }
 
@@ -48,6 +53,9 @@ public class Game {
 
         // Player setup
         player = Application.CreateEntity(new Player());
+        
+        // Create pause menu
+        pauseMenu = new PauseMenu();
     }
     
     public static Player getPlayer() { return player; }
