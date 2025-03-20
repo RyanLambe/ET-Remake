@@ -7,6 +7,7 @@ import Engine.Entities.TextEntity;
 import Game.Map.ZoneManager;
 import Game.UI.MainMenu;
 import Game.UI.PauseMenu;
+import Game.UI.ScoreDisplay;
 
 public class Game {
 
@@ -29,7 +30,9 @@ public class Game {
     public static Player player;
     private static MainMenu mainMenu;
     private static PauseMenu pauseMenu;
+    private static ScoreDisplay scoreDisplay;
     private static boolean gameStarted = false;
+    private static int score = 0;
 
     public static void Start() {
         // Show main menu first
@@ -56,6 +59,14 @@ public class Game {
         
         // Create pause menu
         pauseMenu = new PauseMenu();
+
+        // Create score display
+        scoreDisplay = new ScoreDisplay();
+    }
+
+    public static void AddScore(int points) {
+        score += points;
+        scoreDisplay.UpdateScore(score);
     }
     
     public static Player getPlayer() { return player; }
