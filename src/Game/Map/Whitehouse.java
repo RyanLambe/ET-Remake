@@ -2,11 +2,10 @@ package Game.Map;
 
 import Engine.Application;
 import Game.Hole;
-import Game.WhitehouseFG;
 
 public class Whitehouse extends Zone {
     
-     private WhitehouseFG fg;
+    private WhitehouseFG fg;
 
     public Whitehouse() {
         super("Whitehouse", "WhitehouseBG.png");

@@ -1,9 +1,6 @@
 package Game;
 
-import java.util.HashMap;
-
 import Engine.Application;
-import Engine.Entities.TextEntity;
 import Game.Map.ZoneManager;
 import Game.UI.MainMenu;
 import Game.UI.PauseMenu;
@@ -56,6 +53,10 @@ public class Game {
 
         // Player setup
         player = Application.CreateEntity(new Player());
+
+        // AI Setup
+        AI scientist = Application.CreateEntity(new AI(false, false, 5, 60));
+        AI fbi = Application.CreateEntity(new AI(true, true, 3, 50));
         
         // Create pause menu
         pauseMenu = new PauseMenu();
