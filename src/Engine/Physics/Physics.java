@@ -2,6 +2,8 @@ package Engine.Physics;
 
 import Engine.Application;
 import Engine.Entities.Entity;
+import Game.Hole;
+import Game.Player;
 
 import java.util.ArrayList;
 
@@ -30,11 +32,11 @@ public class Physics {
         colliders = newColliders;
 
         for (int i = 0; i < colliders.size(); i++) {
-            if (colliders.get(i).enabled) {
+            if (!colliders.get(i).enabled) {
                 continue;
             }
             for (int j = i + 1; j < colliders.size(); j++) {
-                if (colliders.get(j).enabled) {
+                if (!colliders.get(j).enabled) {
                     continue;
                 }
                 Collision collision = Collider.DetectCollision(entities.get(i), entities.get(j));
@@ -56,6 +58,11 @@ public class Physics {
     public static void Update() {
         ArrayList<Collision> collisions = DetectCollisions();
         ResolveCollisions(collisions);
+    }
+
+    public static boolean CheckCollision(Hole hole, Player player) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'CheckCollision'");
     }
 
 
