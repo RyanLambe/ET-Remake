@@ -2,8 +2,6 @@ package Engine.Physics;
 
 import Engine.Application;
 import Engine.Entities.Entity;
-import Game.Hole;
-import Game.Player;
 
 import java.util.ArrayList;
 
@@ -59,11 +57,5 @@ public class Physics {
         ArrayList<Collision> collisions = DetectCollisions();
         ResolveCollisions(collisions);
     }
-
-    public static boolean CheckCollision(Hole hole, Player player) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'CheckCollision'");
-    }
-
 
 }
