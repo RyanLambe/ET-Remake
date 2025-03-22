@@ -6,6 +6,7 @@ import Engine.Clock;
 import Engine.Entities.Entity;
 import Engine.Entities.SpriteEntity;
 import Engine.Physics.Collider;
+import Game.UI.PauseMenu;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
@@ -71,6 +72,14 @@ public class AI extends SpriteEntity {
 
     @Override
     public void Update() {
+
+        if(PauseMenu.isPaused){
+            positionClock.Pause();
+            return;
+        }
+        else{
+            positionClock.Resume();
+        }
 
         float MinusOneToOne = ((positionClock.GetTime() % duration) / duration) * 2 - 1;
 
@@ -180,7 +189,7 @@ public class AI extends SpriteEntity {
 
     @Override
     public void OnCollision(Entity other) {
-        if(isHoldingPlayer || Game.zoneManager.getCurrentZone().name.equals("Whitehouse"))
+        if(isHoldingPlayer || Game.zoneManager.getCurrentZone().name.equals("Whitehouse") || PauseMenu.isPaused)
             return;
         if(other.tag.equals("Player")) {
             state = State.Chase;
