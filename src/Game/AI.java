@@ -26,7 +26,6 @@ public class AI extends SpriteEntity {
 
     // go to Jail vars
     public static boolean isHoldingPlayer = false;
-    private boolean leavingJail = false;
 
     // chase vars
     String chaseScreen = "";
@@ -44,8 +43,7 @@ public class AI extends SpriteEntity {
 
     boolean FBI;
     boolean invertDirection;
-
-    boolean reesePunishment = false;
+    boolean reesePunishment;
 
     float lastXPos = 0;
 
