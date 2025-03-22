@@ -41,7 +41,8 @@ public class Player extends SpriteEntity {
             GetSpriteRenderer().sprite.fps = 5;
 
             phonePieces = 0;
-            
+
+            tag = "Player";
             collider.enabled = true;
             GetSpriteRenderer().sprite.ToggleAnimation();
             escaped = false;
@@ -152,7 +153,7 @@ public class Player extends SpriteEntity {
         }
     
         private void eat() {
-            System.out.println("ET is eating!");
+            //System.out.println("ET is eating!");
         }
     
         private void callHome() {
