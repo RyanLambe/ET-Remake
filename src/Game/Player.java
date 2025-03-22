@@ -32,7 +32,7 @@ public class Player extends SpriteEntity {
     private static ActionType currentAction = ActionType.NONE;
     private int phonePieces;
     
-        private float speed = 50;
+        private float speed = 30;
         private boolean escaped;
     
         @Override
@@ -67,7 +67,7 @@ public class Player extends SpriteEntity {
             }
 
             boolean walked = false;
-            if(Input.GetKey('W') &&!Game.zoneManager.getCurrentZone().name.equals("HoleBG")){
+            if(Input.GetKey('W') && !Game.zoneManager.getCurrentZone().name.equals("HoleBG")){
                 transform.Translate(0, Clock.DeltaTime() * speed, 0);
                 GetSpriteRenderer().sprite = walkUp;
                 lastAnimationState = LastAnimationState.Up;
@@ -126,10 +126,28 @@ public class Player extends SpriteEntity {
 
 
             if(escaped == true){
-                transform.position.set(0, 25, 0);
+                //transform.position.set(0, 25, 0);
                 escaped = false;
             }
-    
+
+
+            if(Game.zoneManager.getCurrentZone().name.equals("HoleBG")){
+                transform.position.x = Math.clamp(transform.position.x, -40, 45);
+                transform.position.y = Math.max(transform.position.y, -30);
+            }
+
+            if(Game.zoneManager.getCurrentZone().name.equals("Whitehouse")){
+                transform.position.x = Math.clamp(transform.position.x, -80, 80);
+                transform.position.y = Math.max(transform.position.y, -30);
+            }
+
+            if(Game.zoneManager.getCurrentZone().name.equals("LeftEdge")){
+                transform.position.x = Math.max(transform.position.x, -80);
+            }
+
+            if(Game.zoneManager.getCurrentZone().name.equals("RightEdge")){
+                transform.position.x = Math.min(transform.position.x, 80);
+            }
             
         }
     
@@ -156,9 +174,9 @@ public class Player extends SpriteEntity {
             }
         
             if (y > 45) {
-                transform.position.y = -35;
+                transform.position.y = -25;
                 Game.zoneManager.switchZone("UP");
-            } else if (y < -45) {
+            } else if (y < -30) {
                 transform.position.y = 35;
                 Game.zoneManager.switchZone("DOWN");
             }
@@ -166,7 +184,7 @@ public class Player extends SpriteEntity {
             if (y > 45 && Game.zoneManager.getCurrentZone().name.equals("HoleBG")) {
                 System.out.println("ET Escaped!");
                 Game.zoneManager.switchZone("OUT");
-                transform.position.set(0, 25, 0);  // Set position immediately upon escape
+                transform.position.set(0, 0, 0);  // Set position immediately upon escape
             }
         }
         

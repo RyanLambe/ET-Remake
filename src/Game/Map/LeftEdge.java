@@ -16,8 +16,8 @@ public class LeftEdge extends Zone {
 
     @Override
     public void addEntities() {
-        hole1 = Application.CreateEntity(new Hole(50, 4));    
-        hole2 = Application.CreateEntity(new Hole(-1, 18));   
+        hole1 = Application.CreateEntity(new Hole(35, 4));
+        hole2 = Application.CreateEntity(new Hole(-1, 18));
         hole3 = Application.CreateEntity(new Hole(-50, 2));   
         hole4 = Application.CreateEntity(new Hole(-1, -12));    
 

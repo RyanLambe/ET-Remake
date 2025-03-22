@@ -30,7 +30,7 @@ public class AI extends SpriteEntity {
 
     // chase vars
     String chaseScreen = "";
-    float speed = 30;
+    float speed = 20;
 
     // patrol vars
     private Clock positionClock;
@@ -141,7 +141,7 @@ public class AI extends SpriteEntity {
             else {
 
                 if(transform.position.y < 0)
-                    transform.position.y = -transform.position.y;
+                    transform.position.y = Math.min(-transform.position.y, 40);
 
                 if (Vector2f.distance(transform.position.x, transform.position.y, -40, 5) > 10) {
                     MoveTowards(new Vector3f(-40, 5, 0));

@@ -22,9 +22,12 @@ public class Hole extends SpriteEntity {
     public void Start() {
         GetSpriteRenderer().sprite = AssetManager.LoadSprite("Hole.png");
         transform.position.set(x, y, 0);
-        transform.scale = new Vector2f(15, 15);
+        transform.scale = new Vector2f(10, 10);
         tag = "Hole";
         collider.enabled = true;
+
+        collider.SetRadius(5);
+        //transform.Scale(0.);
     }
 
     @Override

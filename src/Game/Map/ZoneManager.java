@@ -1,6 +1,7 @@
 package Game.Map;
 
 import Engine.Application;
+import Game.Game;
 
 import java.util.HashMap;
 
@@ -71,6 +72,7 @@ public class ZoneManager {
             
             case "HoleBG":
                 if(direction.equals(("UP"))) nextZone = lastZone;
+                Game.getPlayer().transform.position.set(0, 0, 0);
                 break;
         }
 
