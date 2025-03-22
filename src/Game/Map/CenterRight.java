@@ -17,7 +17,7 @@ public class CenterRight extends Zone {
     public void addEntities() {
         hole1 = Application.CreateEntity(new Hole(42, 12));    
         hole2 = Application.CreateEntity(new Hole(-42, 12));   
-        hole3 = Application.CreateEntity(new Hole(3, -17));   
+        hole3 = Application.CreateEntity(new Hole(3, -5));
 
         System.out.println("CenterRight zone entities added.");
     }

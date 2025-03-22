@@ -16,10 +16,10 @@ public class CenterLeft extends Zone {
 
     @Override
     public void addEntities() {
-        hole1 = Application.CreateEntity(new Hole(-40, 17));    
-        hole2 = Application.CreateEntity(new Hole(40, 17));   
-        hole3 = Application.CreateEntity(new Hole(-40, -17));   
-        hole4 = Application.CreateEntity(new Hole(40, -17));    
+        hole1 = Application.CreateEntity(new Hole(-30, 17));
+        hole2 = Application.CreateEntity(new Hole(30, 17));
+        hole3 = Application.CreateEntity(new Hole(-30, -17));
+        hole4 = Application.CreateEntity(new Hole(30, -17));
 
         System.out.println("CenterLeft zone entities added.");
     }

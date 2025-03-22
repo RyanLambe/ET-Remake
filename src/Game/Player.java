@@ -59,7 +59,6 @@ public class Player extends SpriteEntity {
         public void Update() {
 
             checkZoneTransition();
-            System.out.println(transform.position);
 
             if (PauseMenu.isPaused || AI.isHoldingPlayer) {
                 GetSpriteRenderer().sprite = idleDown;
