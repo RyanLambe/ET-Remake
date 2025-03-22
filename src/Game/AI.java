@@ -45,13 +45,16 @@ public class AI extends SpriteEntity {
     boolean FBI;
     boolean invertDirection;
 
+    boolean reesePunishment = false;
+
     float lastXPos = 0;
 
-    public AI(boolean FBISprite, boolean invertDirection, float sinPhases, float cycleDuration){
+    public AI(boolean FBISprite, boolean invertDirection, float sinPhases, float cycleDuration, boolean reesePunishment){
         FBI = FBISprite;
         this.invertDirection = invertDirection;
         verticalPhases = sinPhases;
         duration = cycleDuration;
+        this.reesePunishment = reesePunishment;
     }
 
     @Override
@@ -139,7 +142,12 @@ public class AI extends SpriteEntity {
                 else {
                     state = State.Patrol;
                     isHoldingPlayer = false;
-                    // punishment?!?
+                    if(reesePunishment){
+                        GameState.reeseCount -= 1;
+                    }
+                    else {
+                        GameState.stamina -= 0.1f;
+                    }
                 }
             }
 

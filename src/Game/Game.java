@@ -55,8 +55,8 @@ public class Game {
         player = Application.CreateEntity(new Player());
 
         // AI Setup
-        AI scientist = Application.CreateEntity(new AI(false, false, 5, 60));
-        AI fbi = Application.CreateEntity(new AI(true, true, 3, 50));
+        AI scientist = Application.CreateEntity(new AI(false, false, 5, 60, false));
+        AI fbi = Application.CreateEntity(new AI(true, true, 3, 50, true));
         
         // Create pause menu
         pauseMenu = new PauseMenu();
