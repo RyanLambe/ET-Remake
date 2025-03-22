@@ -24,6 +24,10 @@ public class AI extends SpriteEntity {
     Sprite SciLeft = AssetManager.LoadAnimation("Scientist/Left/0001.png","Scientist/Left/0002.png","Scientist/Left/0003.png","Scientist/Left/0004.png","Scientist/Left/0005.png","Scientist/Left/0006.png","Scientist/Left/0007.png","Scientist/Left/0008.png","Scientist/Left/0009.png","Scientist/Left/0010.png");
     Sprite SciRight = AssetManager.LoadAnimation("Scientist/Right/0001.png","Scientist/Right/0002.png","Scientist/Right/0003.png","Scientist/Right/0004.png","Scientist/Right/0005.png","Scientist/Right/0006.png","Scientist/Right/0007.png","Scientist/Right/0008.png","Scientist/Right/0009.png","Scientist/Right/0010.png");
 
+    // go to Jail vars
+    public static boolean isHoldingPlayer = false;
+    private boolean leavingJail = false;
+
     // chase vars
     String chaseScreen = "";
     float speed = 30;
@@ -107,17 +111,39 @@ public class AI extends SpriteEntity {
                 return;
             }
 
-            if(Vector2f.distance(transform.position.x, transform.position.y, Game.getPlayer().transform.position.x, Game.getPlayer().transform.position.y) < 10){
-                System.out.println("Caught");
+            if(isHoldingPlayer) {
+                state = State.Patrol;
             }
 
-            Vector3f dir = new Vector3f(Game.getPlayer().transform.position);
-            dir.x -= transform.position.x;
-            dir.y -= transform.position.y;
-            dir.z = 0;
-            dir.normalize();
-            dir.mul(speed * Clock.DeltaTime());
-            transform.position.add(dir);
+            if(Vector2f.distance(transform.position.x, transform.position.y, Game.getPlayer().transform.position.x, Game.getPlayer().transform.position.y) < 10){
+                isHoldingPlayer = true;
+                state = State.GoToJail;
+            }
+
+            MoveTowards(Game.getPlayer().transform.position);
+        }
+
+        if(state == State.GoToJail) {
+
+            if(!Game.zoneManager.getCurrentZone().name.equals("Whitehouse")) {
+                transform.position.y -= speed * Clock.DeltaTime();
+            }
+            else {
+
+                if(transform.position.y < 0)
+                    transform.position.y = -transform.position.y;
+
+                if (Vector2f.distance(transform.position.x, transform.position.y, -40, 5) > 10) {
+                    MoveTowards(new Vector3f(-40, 5, 0));
+                }
+                else {
+                    state = State.Patrol;
+                    isHoldingPlayer = false;
+                    // punishment?!?
+                }
+            }
+
+            Game.getPlayer().transform.position = new Vector3f(transform.position);
         }
 
         // set sprite
@@ -136,8 +162,20 @@ public class AI extends SpriteEntity {
         lastXPos = transform.position.x;
     }
 
+    private void MoveTowards(Vector3f pos) {
+        Vector3f dir = new Vector3f(pos);
+        dir.x -= transform.position.x;
+        dir.y -= transform.position.y;
+        dir.z = 0;
+        dir.normalize();
+        dir.mul(speed * Clock.DeltaTime());
+        transform.position.add(dir);
+    }
+
     @Override
     public void OnCollision(Entity other) {
+        if(isHoldingPlayer || Game.zoneManager.getCurrentZone().name.equals("Whitehouse"))
+            return;
         if(other.tag.equals("Player")) {
             state = State.Chase;
             chaseScreen = Game.zoneManager.getCurrentZone().name;

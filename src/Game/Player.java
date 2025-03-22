@@ -50,11 +50,13 @@ public class Player extends SpriteEntity {
     
         @Override
         public void Update() {
-          
-            if (PauseMenu.isPaused) {
+
+            checkZoneTransition();
+            System.out.println(transform.position);
+
+            if (PauseMenu.isPaused || AI.isHoldingPlayer) {
                 return;
             }
-
             
             if(Input.GetKey('W') &&!Game.zoneManager.getCurrentZone().name.equals("HoleBG"))
                 transform.Translate(0, Clock.DeltaTime() * speed, 0);
@@ -79,9 +81,7 @@ public class Player extends SpriteEntity {
             if(Input.GetKey(GLFW.GLFW_KEY_SPACE)){
                 performAction();
             }
-            
-    
-            checkZoneTransition();
+
 
             if(escaped == true){
                 transform.position.set(0, 25, 0);
@@ -93,6 +93,9 @@ public class Player extends SpriteEntity {
     
         @Override
         public void OnCollision(Entity other) {
+            if(AI.isHoldingPlayer)
+                return;
+
             if (other.tag.equals("Hole")) {
                 fallIntoHole();
             }
