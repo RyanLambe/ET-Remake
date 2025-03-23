@@ -11,7 +11,7 @@ public class Reese extends SpriteEntity {
     @Override
     public void Start() {
         // Load Reese's Pieces sprite
-        reeseSprite = AssetManager.LoadSprite("ET/reese.png");
+        reeseSprite = AssetManager.LoadSprite("reese.png");
         GetSpriteRenderer().sprite = reeseSprite;
 
         // Enable collisions and set tag

@@ -2,12 +2,16 @@ package Game.Map;
 
 import Engine.Application;
 import Game.Hole;
+import Game.Reese;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CenterRight extends Zone {
 
     private Hole hole1;
     private Hole hole2;
     private Hole hole3; 
+    private List<Reese> spawnedReeses = new ArrayList<>();
      
     public CenterRight() {
         super("CenterRight", "centerRightBG.png");
@@ -27,6 +31,15 @@ public class CenterRight extends Zone {
         if (hole1 != null) hole1.Destroy();
         if (hole2 != null) hole2.Destroy();
         if (hole3 != null) hole3.Destroy();
+
+        // Clean up Reeses
+        for (Reese reese : spawnedReeses) {
+            if (reese != null) {
+                reese.Destroy();
+            }
+        }
+        spawnedReeses.clear();
+
         System.out.println("CenterRight zone entities removed.");
     }
 }

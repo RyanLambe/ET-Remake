@@ -57,6 +57,7 @@ public class Player extends SpriteEntity {
         tag = "Player";
         collider.enabled = true;
         escaped = false;
+        setAction(ActionType.EAT);
     }
 
     @Override
@@ -123,8 +124,20 @@ public class Player extends SpriteEntity {
             transform.Scale(1 - Clock.DeltaTime());
 
         // will only trigger once at the beginning of a key press (same with GetKeyUp except at the end of the key press)
-        if(Input.GetKey(GLFW.GLFW_KEY_SPACE)){
-            performAction();
+        
+        if (currentAction == ActionType.FLY) {
+            if(Input.GetKey(GLFW.GLFW_KEY_SPACE)){
+                performAction();
+            }
+        } else if (currentAction == ActionType.CALL_HOME) {
+            if(Input.GetKey(GLFW.GLFW_KEY_SPACE)){
+                performAction();
+            }
+        } else if (currentAction == ActionType.EAT) {
+            if(Input.GetKeyDown(GLFW.GLFW_KEY_SPACE)){
+                performAction();
+            }
+
         }
 
 
@@ -171,23 +184,28 @@ public class Player extends SpriteEntity {
         if (x > 80) {
             transform.position.x = -60;
             Game.zoneManager.switchZone("RIGHT");
+            setAction(ActionType.EAT);
         } else if (x < -80) {
             transform.position.x = 60;
             Game.zoneManager.switchZone("LEFT");
+            setAction(ActionType.EAT);
         }
 
         if (y > 45) {
             transform.position.y = -25;
             Game.zoneManager.switchZone("UP");
+            setAction(ActionType.EAT);
         } else if (y < -30) {
             transform.position.y = 35;
             Game.zoneManager.switchZone("DOWN");
+            setAction(ActionType.EAT);
         }
 
         if (y > 45 && Game.zoneManager.getCurrentZone().name.equals("HoleBG")) {
             System.out.println("ET Escaped!");
             Game.zoneManager.switchZone("OUT");
             transform.position.set(0, 0, 0);  // Set position immediately upon escape
+            setAction(ActionType.EAT);
         }
     }
 
