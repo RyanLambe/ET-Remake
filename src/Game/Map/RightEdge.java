@@ -20,10 +20,10 @@ public class RightEdge extends Zone {
 
     @Override
     public void addEntities() {
-        hole1 = Application.CreateEntity(new Hole(0, 20));    
-        hole2 = Application.CreateEntity(new Hole(38, -2));   
-        hole3 = Application.CreateEntity(new Hole(0, -25));   
-        hole4 = Application.CreateEntity(new Hole(-26, -1));    
+        hole1 = Application.CreateEntity(new Hole(0, 20, false));
+        hole2 = Application.CreateEntity(new Hole(38, -2, false));
+        hole3 = Application.CreateEntity(new Hole(0, -25, false));
+        hole4 = Application.CreateEntity(new Hole(-26, -1, false));
 
         System.out.println("RightEdge zone entities added.");
     }

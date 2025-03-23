@@ -12,10 +12,12 @@ public class Hole extends SpriteEntity {
     private int x;
     private int y;
 
-    public Hole(int x, int y) {
+    public boolean hasPhone = false;
+
+    public Hole(int x, int y, boolean hasPhone) {
         this.x = x;
         this.y = y;
-       
+        this.hasPhone = hasPhone;
     }
 
     @Override
@@ -31,5 +33,7 @@ public class Hole extends SpriteEntity {
     }
 
     @Override
-    public void Update() {}
+    public void Update() {
+
+    }
 }

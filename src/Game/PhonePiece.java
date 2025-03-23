@@ -4,19 +4,36 @@ import Engine.AssetManagement.AssetManager;
 import Engine.AssetManagement.Sprite;
 import Engine.Entities.Entity;
 import Engine.Entities.SpriteEntity;
+import org.joml.Math;
+import org.joml.Vector2f;
 
 public class PhonePiece extends SpriteEntity {
     private Sprite phoneSprite;
 
+    public static boolean show = false;
+
     @Override
     public void Start() {
         // Load phone piece sprite
-        phoneSprite = AssetManager.LoadSprite("ET/phone_piece.png");
+        phoneSprite = AssetManager.LoadSprite("PhoneComplete.png");
         GetSpriteRenderer().sprite = phoneSprite;
 
         // Enable collisions and set tag
         tag = "PhonePiece";
         collider.enabled = true;
+        transform.position.x = -25;
+    }
+
+    @Override
+    public void Update() {
+        //
+
+        if(show){
+            transform.position.y = -30;
+        }
+        else{
+            transform.position.y = -2000;
+        }
     }
 
     @Override
@@ -27,7 +44,7 @@ public class PhonePiece extends SpriteEntity {
             player.addPhonePiece();
 
             // Destroy phone piece after collecting
-            Destroy();
+            show = false;
         }
     }
 }

@@ -151,6 +151,7 @@ public class AI extends SpriteEntity {
                     isHoldingPlayer = false;
                     if(reesePunishment){
                         GameState.reeseCount -= 1;
+                        GameState.reeseCount = Math.max(GameState.reeseCount, 0);
                     }
                     else {
                         GameState.stamina -= 0.1f;

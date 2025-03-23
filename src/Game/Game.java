@@ -1,6 +1,7 @@
 package Game;
 
 import Engine.Application;
+import Engine.Physics.Physics;
 import Game.Map.ZoneManager;
 import Game.UI.MainMenu;
 import Game.UI.PauseMenu;
@@ -32,6 +33,10 @@ public class Game {
     public static boolean gameLoaded = false;
     private static int score = 0;
 
+    static AI scientist;
+    static AI fbi;
+    static PhonePiece phonePiece;
+
     public static void Start() {
         // Show main menu first
         mainMenu = new MainMenu();
@@ -61,9 +66,11 @@ public class Game {
 
 
         // AI Setup
-        AI scientist = Application.CreateEntity(new AI(false, false, 5, 90, false));
-        AI fbi = Application.CreateEntity(new AI(true, true, 3, 80, true));
+        scientist = Application.CreateEntity(new AI(false, false, 5, 90, false));
+        fbi = Application.CreateEntity(new AI(true, true, 3, 80, true));
 
+        // create phone pieces
+        phonePiece = Application.CreateEntity(new PhonePiece());
         
         // Create pause menu
         pauseMenu = new PauseMenu();
