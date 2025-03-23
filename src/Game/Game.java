@@ -28,7 +28,7 @@ public class Game {
     private static MainMenu mainMenu;
     private static PauseMenu pauseMenu;
     private static ScoreDisplay scoreDisplay;
-    private static boolean gameStarted = false;
+    public static boolean gameStarted = false;
     private static int score = 0;
 
     public static void Start() {

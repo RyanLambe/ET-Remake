@@ -5,10 +5,11 @@ import Engine.AssetManagement.Sprite;
 import Engine.Clock;
 import Engine.Entities.Entity;
 import Engine.Entities.SpriteEntity;
+import Game.UI.PauseMenu;
 
 public class Spaceship extends SpriteEntity {
     private Sprite shipSprite;
-    private float speed = 50f;
+    private float speed = 10f;
     private boolean hasLaunched = false;
     private boolean hasPlayer = false;
     private Player attachedPlayer = null;
@@ -48,6 +49,10 @@ public class Spaceship extends SpriteEntity {
 
     @Override
     public void Update() {
+
+        if(!Game.gameStarted)
+            return;
+
         if (hasLaunched) {
             // Move upward with player if attached
             transform.Translate(0, Clock.DeltaTime() * speed, 0);
@@ -57,6 +62,7 @@ public class Spaceship extends SpriteEntity {
 
             // Destroy when off screen
             if (transform.position.y > 100) {
+                System.out.println("SHip destroyed");
                 if (hasPlayer) {
                     Game.zoneManager.switchZone("END"); // Switch to end game zone
                 } else if (isInitialLaunch) {
