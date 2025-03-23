@@ -36,6 +36,8 @@ public class Player extends SpriteEntity {
     private float maxStamina = 100f;
     private float staminaRegenRate = 25f;
 
+    private int skipFrames = 2;
+
     private float speed = 30;
     private boolean escaped;
 
@@ -64,8 +66,13 @@ public class Player extends SpriteEntity {
 
         checkZoneTransition();
 
-        if (PauseMenu.isPaused || AI.isHoldingPlayer) {
+        if (PauseMenu.isPaused || AI.isHoldingPlayer || !Game.gameLoaded) {
             GetSpriteRenderer().sprite = idleDown;
+            return;
+        }
+
+        if(skipFrames > 0){
+            skipFrames--;
             return;
         }
 
