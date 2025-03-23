@@ -10,7 +10,6 @@ import Engine.Application;
 import Game.UI.PauseMenu;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.vulkan.EXTAttachmentFeedbackLoopDynamicState;
 
 // currently used for engine testing
 public class Player extends SpriteEntity {
