@@ -9,6 +9,7 @@ import Engine.Input;
 import Engine.Application;
 import Game.UI.PauseMenu;
 import org.joml.Vector3f;
+import org.joml.Math;
 import org.lwjgl.glfw.GLFW;
 
 // currently used for engine testing
@@ -29,12 +30,8 @@ public class Player extends SpriteEntity {
     }
     LastAnimationState lastAnimationState = LastAnimationState.Down;
 
-    private static ActionType currentAction = ActionType.NONE;
-    private int phonePieces;
-    private int reesePieces = 0;
-    private float stamina = 100f;
-    private float maxStamina = 100f;
-    private float staminaRegenRate = 25f;
+    private float maxStamina = 1;
+    private float staminaRegenRate = .25f;
 
     private int skipFrames = 2;
 
@@ -53,8 +50,6 @@ public class Player extends SpriteEntity {
         walkDown.fps = 10;
 
         GetSpriteRenderer().sprite = walkLeft;
-
-        phonePieces = 0;
 
         tag = "Player";
         collider.enabled = true;
@@ -132,15 +127,15 @@ public class Player extends SpriteEntity {
 
         // will only trigger once at the beginning of a key press (same with GetKeyUp except at the end of the key press)
         
-        if (currentAction == ActionType.FLY) {
+        if (GameState.action == ActionType.FLY) {
             if(Input.GetKey(GLFW.GLFW_KEY_SPACE)){
                 performAction();
             }
-        } else if (currentAction == ActionType.CALL_HOME) {
+        } else if (GameState.action == ActionType.CALL_HOME) {
             if(Input.GetKey(GLFW.GLFW_KEY_SPACE)){
                 performAction();
             }
-        } else if (currentAction == ActionType.EAT) {
+        } else if (GameState.action == ActionType.EAT) {
             if(Input.GetKeyDown(GLFW.GLFW_KEY_SPACE)){
                 performAction();
             }
@@ -180,6 +175,8 @@ public class Player extends SpriteEntity {
             return;
 
         if (other.tag.equals("Hole")) {
+            if(((Hole)other).hasPhone)
+                PhonePiece.show = true;
             fallIntoHole();
         }
     }
@@ -217,21 +214,21 @@ public class Player extends SpriteEntity {
     }
 
     public void addPhonePiece() {
-        phonePieces++;
-        System.out.println("Phone pieces collected: " + phonePieces);
+        GameState.phonePartsCollected++;
+        System.out.println("Phone pieces collected: " + GameState.phonePartsCollected);
     }
 
     public int getPhonePieces() {
-        return phonePieces;
+        return GameState.phonePartsCollected;
     }
 
     public void addReesePiece() {
-        reesePieces++;
-        System.out.println("Reese's Pieces collected: " + reesePieces);
+        GameState.reeseCount++;
+        System.out.println("Reese's Pieces collected: " + GameState.reeseCount);
     }
 
     public float getStamina() {
-        return stamina;
+        return GameState.stamina;
     }
 
     public float getMaxStamina() {
@@ -239,7 +236,7 @@ public class Player extends SpriteEntity {
     }
 
     public void useStamina(float amount) {
-        stamina = Math.max(0, stamina - amount);
+        GameState.stamina = Math.max(0, GameState.stamina - amount);
     }
 
     private void fallIntoHole() {
@@ -251,7 +248,7 @@ public class Player extends SpriteEntity {
 
 
     private void performAction() {
-        switch(currentAction) {
+        switch(GameState.action) {
             case FLY:
                 fly();
                 break;
@@ -269,9 +266,9 @@ public class Player extends SpriteEntity {
     }
 
     private void eat() {
-        if (reesePieces > 0) {
-            reesePieces--;
-            System.out.println("ET is eating! " + reesePieces + " left.");
+        if (GameState.reeseCount > 0) {
+            GameState.reeseCount--;
+            System.out.println("ET is eating! " + GameState.reeseCount + " left.");
         } else {
             System.out.println("No Reese's Pieces left to eat!");
         }
@@ -279,11 +276,11 @@ public class Player extends SpriteEntity {
 
     private void callHome() {
 
-        if (phonePieces >= 3) {
+        if (GameState.phonePartsCollected >= 3) {
             System.out.println("ET is calling home! (Signal Sent)");
             Spaceship spaceship = Application.CreateEntity(new Spaceship());
             spaceship.transform.position.set(0, 0, 0);
-            phonePieces = 0;
+            GameState.phonePartsCollected = 0;
         } else {
             System.out.println("Not enough phone pieces to call home!");
         }
@@ -291,7 +288,7 @@ public class Player extends SpriteEntity {
 
     //change the current action
     public static void setAction(ActionType action) {
-        currentAction = action;
+        GameState.action = action;
         System.out.println("Action changed to: " + action);
     }
 }
