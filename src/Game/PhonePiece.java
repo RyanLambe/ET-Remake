@@ -44,7 +44,7 @@ public class PhonePiece extends SpriteEntity {
             player.addPhonePiece();
 
             // Destroy phone piece after collecting
-            Destroy();
+            show = false;
         }
     }
 }
