@@ -11,6 +11,7 @@ import Game.UI.PauseMenu;
 import org.joml.Vector3f;
 import org.joml.Math;
 import org.lwjgl.glfw.GLFW;
+import org.joml.Math;
 
 // currently used for engine testing
 public class Player extends SpriteEntity {
