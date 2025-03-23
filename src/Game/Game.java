@@ -28,7 +28,8 @@ public class Game {
     private static MainMenu mainMenu;
     private static PauseMenu pauseMenu;
     private static ScoreDisplay scoreDisplay;
-    public static boolean gameStarted = false;
+    private static boolean gameStarted = false;
+    public static boolean gameLoaded = false;
     private static int score = 0;
 
     public static void Start() {
@@ -47,7 +48,7 @@ public class Game {
 
     public static void StartGame() {
         gameStarted = true;
-        
+
         zoneManager = new ZoneManager();
         // Player setup
         player = Application.CreateEntity(new Player());
@@ -69,6 +70,8 @@ public class Game {
 
         // Create score display
         scoreDisplay = new ScoreDisplay();
+
+        gameLoaded = true;
     }
 
     public static void AddScore(int points) {

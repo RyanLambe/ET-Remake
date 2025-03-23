@@ -8,30 +8,19 @@ import Engine.Entities.SpriteEntity;
 import Game.UI.PauseMenu;
 
 public class Spaceship extends SpriteEntity {
-    private Sprite shipSprite;
+
     private float speed = 10f;
     private boolean hasLaunched = false;
     private boolean hasPlayer = false;
     private Player attachedPlayer = null;
     private boolean isInitialLaunch;
+    private int skipFrames = 2;
+    private float pos = 0;
 
     @Override
     public void Start() {
         // Load spaceship sprite
-        /*shipSprite = AssetManager.LoadSprite("ship.png");
-        GetSpriteRenderer().sprite = shipSprite;*/
-
-        String spritePath = "ship.png";
-        System.out.println("Attempting to load sprite from: " + spritePath);
-        shipSprite = AssetManager.LoadSprite(spritePath);
-        
-        if (shipSprite == null) {
-            System.out.println("Failed to load sprite: " + spritePath);
-        } else {
-            System.out.println("Successfully loaded sprite: " + spritePath);
-        }
-        
-        GetSpriteRenderer().sprite = shipSprite;
+        GetSpriteRenderer().sprite = AssetManager.LoadSprite("ship.png");;
         
         // Set tag and collider
         tag = "Spaceship";
@@ -50,12 +39,22 @@ public class Spaceship extends SpriteEntity {
     @Override
     public void Update() {
 
-        if(!Game.gameStarted)
+        if(!Game.gameLoaded)
             return;
+
+        if(skipFrames > 0){
+            skipFrames--;
+            return;
+        }
+
+        if(!Game.zoneManager.getCurrentZone().name.equals("Forest")){
+            transform.position.y = -2000;
+            return;
+        }
 
         if (hasLaunched) {
             // Move upward with player if attached
-            transform.Translate(0, Clock.DeltaTime() * speed, 0);
+            pos += Clock.DeltaTime() * speed;
             if (hasPlayer && attachedPlayer != null) {
                 attachedPlayer.transform.position.set(transform.position.x, transform.position.y, 0);
             }
@@ -72,6 +71,7 @@ public class Spaceship extends SpriteEntity {
                 }
             }
         }
+        transform.position.y = pos;
     }
 
     @Override
