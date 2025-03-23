@@ -17,7 +17,19 @@ public class Spaceship extends SpriteEntity {
     @Override
     public void Start() {
         // Load spaceship sprite
-        shipSprite = AssetManager.LoadSprite("ET/spaceship.png");
+        /*shipSprite = AssetManager.LoadSprite("ship.png");
+        GetSpriteRenderer().sprite = shipSprite;*/
+
+        String spritePath = "ship.png";
+        System.out.println("Attempting to load sprite from: " + spritePath);
+        shipSprite = AssetManager.LoadSprite(spritePath);
+        
+        if (shipSprite == null) {
+            System.out.println("Failed to load sprite: " + spritePath);
+        } else {
+            System.out.println("Successfully loaded sprite: " + spritePath);
+        }
+        
         GetSpriteRenderer().sprite = shipSprite;
         
         // Set tag and collider
