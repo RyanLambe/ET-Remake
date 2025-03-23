@@ -49,14 +49,20 @@ public class Game {
         gameStarted = true;
         
         zoneManager = new ZoneManager();
-        zoneManager.loadZone("Forest");
-
         // Player setup
         player = Application.CreateEntity(new Player());
+
+        zoneManager.loadZone("Forest");
+
+        // Create spaceship
+        Spaceship initialShip = Application.CreateEntity(new Spaceship());
+        initialShip.transform.position.set(0, 0, 0);
+
 
         // AI Setup
         AI scientist = Application.CreateEntity(new AI(false, false, 5, 90, false));
         AI fbi = Application.CreateEntity(new AI(true, true, 3, 80, true));
+
         
         // Create pause menu
         pauseMenu = new PauseMenu();
