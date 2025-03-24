@@ -28,16 +28,16 @@ public class ScoreDisplay {
 
         // Create spacebar icon behind the text
         spacebarIcon = Application.CreateEntity(new SpriteEntity());
-        spacebarIcon.GetSpriteRenderer().sprite = AssetManager.LoadSprite("background/Spacebaricon.png");
-        spacebarIcon.transform.position.x = -10; // Moved left to center with text
-        spacebarIcon.transform.position.y = -40;
+        spacebarIcon.GetSpriteRenderer().sprite = AssetManager.LoadSprite("background/SpacebarIcon.png");
+        spacebarIcon.transform.position.x = 2; // Moved left to center with text
+        spacebarIcon.transform.position.y = -41;
         spacebarIcon.transform.position.z = 90.5f; // Between container and text
-        spacebarIcon.transform.scale = new Vector2f(15, 3); // Adjusted size
+        spacebarIcon.transform.scale = new Vector2f(30, 15); // Adjusted size
 
         // Create controls text in the middle
         controlsText = Application.CreateEntity(new TextEntity());
         controlsText.GetTextRenderer().SetText("Press SPACE to fly");
-        controlsText.GetTextRenderer().SetColor(new Vector3f(1.0f, 1.0f, 1.0f));
+        controlsText.GetTextRenderer().SetColor(new Vector3f(0.0f, 0.0f, 0.0f));
         controlsText.transform.position.x = -10; // Centered with icon
         controlsText.transform.position.y = -40; // Match container position
         controlsText.transform.position.z = 91; // In front of container
