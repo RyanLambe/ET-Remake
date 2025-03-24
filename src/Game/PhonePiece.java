@@ -28,6 +28,11 @@ public class PhonePiece extends SpriteEntity {
     public void Update() {
         //
 
+
+        if(!Game.zoneManager.getCurrentZone().name.equals("HoleBG")) {
+            show = false;
+        }
+
         if(show){
             transform.position.y = -30;
         }
