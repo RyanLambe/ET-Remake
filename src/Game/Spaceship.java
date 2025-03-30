@@ -9,7 +9,7 @@ import Game.UI.PauseMenu;
 
 public class Spaceship extends SpriteEntity {
 
-    private float speed = 10f;
+    private float speed = 20f;
     private boolean hasLaunched = false;
     private boolean hasPlayer = false;
     private Player attachedPlayer = null;
@@ -47,11 +47,6 @@ public class Spaceship extends SpriteEntity {
             return;
         }
 
-        if(!Game.zoneManager.getCurrentZone().name.equals("Forest")){
-            transform.position.y = -2000;
-            return;
-        }
-
         if (hasLaunched) {
             // Move upward with player if attached
             pos += Clock.DeltaTime() * speed;
@@ -60,8 +55,8 @@ public class Spaceship extends SpriteEntity {
             }
 
             // Destroy when off screen
-            if (transform.position.y > 100) {
-                System.out.println("SHip destroyed");
+            if (pos > 100) {
+                System.out.println("Ship destroyed");
                 if (hasPlayer) {
                     Game.zoneManager.switchZone("END"); // Switch to end game zone
                 } else if (isInitialLaunch) {
@@ -70,6 +65,11 @@ public class Spaceship extends SpriteEntity {
                     Destroy();
                 }
             }
+        }
+
+        if(!Game.zoneManager.getCurrentZone().name.equals("Forest")){
+            transform.position.y = -2000;
+            return;
         }
         transform.position.y = pos;
     }
