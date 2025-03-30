@@ -8,7 +8,6 @@ import org.joml.Math;
 import org.joml.Vector2f;
 
 public class PhonePiece extends SpriteEntity {
-    int phonePiecesCollected = GameState.phonePartsCollected;
     private Sprite phoneSprite;
     public static boolean show = false;
 
@@ -22,7 +21,7 @@ public class PhonePiece extends SpriteEntity {
         // Enable collisions and set tag
         tag = "PhonePiece";
         collider.enabled = true;
-        //transform.position.x = -25;
+        transform.position.x = -25;
     }
 
     @Override
@@ -30,12 +29,12 @@ public class PhonePiece extends SpriteEntity {
         //
 
 
-        if ((!Game.zoneManager.getCurrentZone().name.equals("HoleBG")) || (phonePiecesCollected == 3)) {
+        if ((!Game.zoneManager.getCurrentZone().name.equals("HoleBG")) || (GameState.phonePartsCollected == 3)) {
             show = false;
         }
 
         if (show) {
-            transform.position.y = -30;
+            transform.position.y = -20;
         } else {
             transform.position.y = -2000;
         }
@@ -57,7 +56,7 @@ public class PhonePiece extends SpriteEntity {
     }
 
     private void updatePhoneSprite() {
-        switch (phonePiecesCollected) {
+        switch (GameState.phonePartsCollected) {
             case 0:
                 phoneSprite = AssetManager.LoadSprite("Phone1.png");
                 break;

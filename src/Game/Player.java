@@ -146,8 +146,9 @@ public class Player extends SpriteEntity {
 
 
         if(Game.zoneManager.getCurrentZone().name.equals("HoleBG")){
-            transform.position.x = Math.clamp(transform.position.x, -40, 45);
-            transform.position.y = Math.max(transform.position.y, -30);
+            transform.position.x = Math.max(transform.position.x, -40);
+            transform.position.x = Math.min(transform.position.x, 45);
+            transform.position.y = Math.max(transform.position.y, -20);
         }
 
         if(Game.zoneManager.getCurrentZone().name.equals("Forest")){
@@ -157,7 +158,8 @@ public class Player extends SpriteEntity {
         }
 
         if(Game.zoneManager.getCurrentZone().name.equals("Whitehouse")){
-            transform.position.x = Math.clamp(transform.position.x, -80, 80);
+            transform.position.x = Math.max(transform.position.x, -80);
+            transform.position.x = Math.min(transform.position.x, 80);
             transform.position.y = Math.max(transform.position.y, -30);
         }
 
