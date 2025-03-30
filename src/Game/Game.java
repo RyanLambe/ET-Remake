@@ -31,7 +31,6 @@ public class Game {
     private static ScoreDisplay scoreDisplay;
     private static boolean gameStarted = false;
     public static boolean gameLoaded = false;
-    private static int score = 0;
 
     static AI scientist;
     static AI fbi;
@@ -76,14 +75,9 @@ public class Game {
         pauseMenu = new PauseMenu();
 
         // Create score display
-        scoreDisplay = new ScoreDisplay();
+        scoreDisplay = Application.CreateEntity(new ScoreDisplay());
 
         gameLoaded = true;
-    }
-
-    public static void AddScore(int points) {
-        score += points;
-        scoreDisplay.UpdateScore(score);
     }
     
     public static Player getPlayer() { return player; }

@@ -33,6 +33,7 @@ public class Player extends SpriteEntity {
 
     private float maxStamina = 1;
     private float staminaRegenRate = .25f;
+    private float staminaMultiplier = 0.01f;
 
     private int skipFrames = 2;
 
@@ -78,24 +79,28 @@ public class Player extends SpriteEntity {
             transform.Translate(0, Clock.DeltaTime() * speed, 0);
             GetSpriteRenderer().sprite = walkUp;
             lastAnimationState = LastAnimationState.Up;
+            useStamina(Clock.DeltaTime() * staminaMultiplier);
             walked = true;
         }
         if(Input.GetKey('S')){
             transform.Translate(0, -Clock.DeltaTime() * speed, 0);
             GetSpriteRenderer().sprite = walkDown;
             lastAnimationState = LastAnimationState.Down;
+            useStamina(Clock.DeltaTime() * staminaMultiplier);
             walked = true;
         }
         if(Input.GetKey('D')){
             transform.Translate(Clock.DeltaTime() * speed, 0, 0);
             GetSpriteRenderer().sprite = walkRight;
             lastAnimationState = LastAnimationState.Right;
+            useStamina(Clock.DeltaTime() * staminaMultiplier);
             walked = true;
         }
         if(Input.GetKey('A')){
             transform.Translate(-Clock.DeltaTime() * speed, 0, 0);
             GetSpriteRenderer().sprite = walkLeft;
             lastAnimationState = LastAnimationState.Left;
+            useStamina(Clock.DeltaTime() * staminaMultiplier);
             walked = true;
         }
 
@@ -265,6 +270,7 @@ public class Player extends SpriteEntity {
     private void eat() {
         if (GameState.reeseCount > 0) {
             GameState.reeseCount--;
+            GameState.stamina = Math.min(GameState.stamina + staminaRegenRate, 1);
             System.out.println("ET is eating! " + GameState.reeseCount + " left.");
         } else {
             System.out.println("No Reese's Pieces left to eat!");
