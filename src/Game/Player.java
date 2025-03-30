@@ -116,16 +116,6 @@ public class Player extends SpriteEntity {
             }
         }
 
-        if(Input.GetKey('E'))
-            transform.Rotate(Clock.DeltaTime());
-        if(Input.GetKey('Q'))
-            transform.Rotate(-Clock.DeltaTime());
-
-        if(Input.GetKey('R'))
-            transform.Scale(1 + Clock.DeltaTime());
-        if(Input.GetKey('F'))
-            transform.Scale(1 - Clock.DeltaTime());
-
         // will only trigger once at the beginning of a key press (same with GetKeyUp except at the end of the key press)
         
         if (GameState.action == ActionType.FLY) {
