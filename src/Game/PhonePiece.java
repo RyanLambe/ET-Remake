@@ -8,20 +8,21 @@ import org.joml.Math;
 import org.joml.Vector2f;
 
 public class PhonePiece extends SpriteEntity {
+    int phonePiecesCollected = GameState.phonePartsCollected;
     private Sprite phoneSprite;
-
     public static boolean show = false;
 
     @Override
     public void Start() {
         // Load phone piece sprite
-        phoneSprite = AssetManager.LoadSprite("PhoneComplete.png");
+        // phoneSprite = AssetManager.LoadSprite("PhoneComplete.png");
+        updatePhoneSprite();
         GetSpriteRenderer().sprite = phoneSprite;
 
         // Enable collisions and set tag
         tag = "PhonePiece";
         collider.enabled = true;
-        transform.position.x = -25;
+        //transform.position.x = -25;
     }
 
     @Override
@@ -29,14 +30,13 @@ public class PhonePiece extends SpriteEntity {
         //
 
 
-        if(!Game.zoneManager.getCurrentZone().name.equals("HoleBG")) {
+        if ((!Game.zoneManager.getCurrentZone().name.equals("HoleBG")) || (phonePiecesCollected == 3)) {
             show = false;
         }
 
-        if(show){
+        if (show) {
             transform.position.y = -30;
-        }
-        else{
+        } else {
             transform.position.y = -2000;
         }
     }
@@ -48,8 +48,29 @@ public class PhonePiece extends SpriteEntity {
             Player player = (Player)other;
             player.addPhonePiece();
 
+            // Update phone sprite for next piece
+            updatePhoneSprite();
+
             // Destroy phone piece after collecting
             show = false;
         }
+    }
+
+    private void updatePhoneSprite() {
+        switch (phonePiecesCollected) {
+            case 0:
+                phoneSprite = AssetManager.LoadSprite("Phone1.png");
+                break;
+            case 1:
+                phoneSprite = AssetManager.LoadSprite("Phone2.png");
+                break;
+            case 2:
+                phoneSprite = AssetManager.LoadSprite("Phone3.png");
+                break;
+            default:
+                phoneSprite = AssetManager.LoadSprite("PhoneComplete.png");
+                break;
+        }
+        GetSpriteRenderer().sprite = phoneSprite;
     }
 }
