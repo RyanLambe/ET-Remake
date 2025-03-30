@@ -75,28 +75,28 @@ public class Player extends SpriteEntity {
         }
 
         boolean walked = false;
-        if(Input.GetKey('W') && !Game.zoneManager.getCurrentZone().name.equals("HoleBG")){
+        if((Input.GetKey('W') || Input.GetKey(GLFW.GLFW_KEY_UP)) && !Game.zoneManager.getCurrentZone().name.equals("HoleBG")){
             transform.Translate(0, Clock.DeltaTime() * speed, 0);
             GetSpriteRenderer().sprite = walkUp;
             lastAnimationState = LastAnimationState.Up;
             useStamina(Clock.DeltaTime() * staminaMultiplier);
             walked = true;
         }
-        if(Input.GetKey('S')){
+        if(Input.GetKey('S') || Input.GetKey(GLFW.GLFW_KEY_DOWN)){
             transform.Translate(0, -Clock.DeltaTime() * speed, 0);
             GetSpriteRenderer().sprite = walkDown;
             lastAnimationState = LastAnimationState.Down;
             useStamina(Clock.DeltaTime() * staminaMultiplier);
             walked = true;
         }
-        if(Input.GetKey('D')){
+        if(Input.GetKey('D') || Input.GetKey(GLFW.GLFW_KEY_RIGHT)){
             transform.Translate(Clock.DeltaTime() * speed, 0, 0);
             GetSpriteRenderer().sprite = walkRight;
             lastAnimationState = LastAnimationState.Right;
             useStamina(Clock.DeltaTime() * staminaMultiplier);
             walked = true;
         }
-        if(Input.GetKey('A')){
+        if(Input.GetKey('A') || Input.GetKey(GLFW.GLFW_KEY_LEFT)){
             transform.Translate(-Clock.DeltaTime() * speed, 0, 0);
             GetSpriteRenderer().sprite = walkLeft;
             lastAnimationState = LastAnimationState.Left;
