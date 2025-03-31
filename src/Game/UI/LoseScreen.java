@@ -1,6 +1,7 @@
 package Game.UI;
 
 import Engine.Application;
+import Engine.Entities.Entity;
 import Engine.Entities.TextEntity;
 import Engine.Entities.SpriteEntity;
 import Engine.Input;
@@ -8,9 +9,10 @@ import Engine.AssetManagement.AssetManager;
 import Game.Game;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 import org.lwjgl.glfw.GLFW;
 
-public class LoseScreen {
+public class LoseScreen extends Entity {
     private TextEntity loseText;
     private TextEntity reasonText;
     private TextEntity playAgainText;
@@ -26,14 +28,14 @@ public class LoseScreen {
     private void CreateScreenElements() {
         // Red background
         background = Application.CreateEntity(new SpriteEntity());
-        background.GetSpriteRenderer().SetColor(new Vector3f(0.8f, 0.2f, 0.2f)); // Red background
+        background.GetSpriteRenderer().SetColor(new Vector4f(0.8f, 0.2f, 0.2f, 1.0f)); // Red background
         background.transform.position.z = 95; // Behind text
         background.transform.scale = new Vector2f(160, 90); // Full screen size
 
         // "YOU LOST!" text
         loseText = Application.CreateEntity(new TextEntity());
         loseText.GetTextRenderer().SetText("YOU LOST!");
-        loseText.GetTextRenderer().SetColor(new Vector3f(1.0f, 1.0f, 1.0f));
+        loseText.GetTextRenderer().SetColor(new Vector4f(1.0f, 1.0f, 1.0f, 1.0f));
         loseText.transform.position.x = -40;
         loseText.transform.position.y = 20;
         loseText.transform.position.z = 100;
@@ -42,7 +44,7 @@ public class LoseScreen {
         // Reason text
         reasonText = Application.CreateEntity(new TextEntity());
         reasonText.GetTextRenderer().SetText("You ran out of stamina!");
-        reasonText.GetTextRenderer().SetColor(new Vector3f(1.0f, 1.0f, 1.0f));
+        reasonText.GetTextRenderer().SetColor(new Vector4f(1.0f, 1.0f, 1.0f, 1.0f));
         reasonText.transform.position.x = -40;
         reasonText.transform.position.y = -10;
         reasonText.transform.position.z = 100;
@@ -51,7 +53,7 @@ public class LoseScreen {
         // "Press SPACE to Play Again" text
         playAgainText = Application.CreateEntity(new TextEntity());
         playAgainText.GetTextRenderer().SetText("Press SPACE to Play Again");
-        playAgainText.GetTextRenderer().SetColor(new Vector3f(0.8f, 0.8f, 0.8f));
+        playAgainText.GetTextRenderer().SetColor(new Vector4f(0.8f, 0.8f, 0.8f, 1.0f));
         playAgainText.transform.position.x = -40;
         playAgainText.transform.position.y = -40;
         playAgainText.transform.position.z = 100;
@@ -63,13 +65,13 @@ public class LoseScreen {
 
         if (Input.GetKeyDown(GLFW.GLFW_KEY_SPACE)) {
             Hide();
-            Game.StartGame();
+            Game.RestartGame();
         }
     }
 
     public void Show() {
         isActive = true;
-        background.GetSpriteRenderer().SetColor(new Vector3f(0.8f, 0.2f, 0.2f));
+        background.GetSpriteRenderer().SetColor(new Vector4f(0.8f, 0.2f, 0.2f, 1.0f));
         loseText.GetTextRenderer().SetText("YOU LOST!");
         reasonText.GetTextRenderer().SetText("You ran out of stamina!");
         playAgainText.GetTextRenderer().SetText("Press SPACE to Play Again");
@@ -77,7 +79,7 @@ public class LoseScreen {
 
     private void Hide() {
         isActive = false;
-        background.GetSpriteRenderer().SetColor(new Vector3f(0, 0, 0));
+        background.GetSpriteRenderer().SetColor(new Vector4f(0, 0, 0, 0.0f));
         loseText.GetTextRenderer().SetText("");
         reasonText.GetTextRenderer().SetText("");
         playAgainText.GetTextRenderer().SetText("");

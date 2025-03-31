@@ -4,6 +4,7 @@ import Engine.AssetManagement.Sprite;
 import Engine.Entities.Transform;
 
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
@@ -29,7 +30,7 @@ public class SpriteRenderer implements Renderer {
 
     private static Shader spriteShader = null;
 
-    private Vector3f color = new Vector3f(1, 1, 1);
+    private Vector4f color = new Vector4f(1, 1, 1, 1);
 
     public Sprite sprite = null;
 
@@ -63,11 +64,11 @@ public class SpriteRenderer implements Renderer {
         GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, 6);
     }
 
-    public void SetColor(Vector3f color){
+    public void SetColor(Vector4f color){
         this.color = color;
     }
 
-    public Vector3f GetColor(){
+    public Vector4f GetColor(){
         return color;
     }
 

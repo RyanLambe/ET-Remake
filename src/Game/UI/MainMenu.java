@@ -9,6 +9,7 @@ import Engine.AssetManagement.AssetManager;
 import Game.Game;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 import org.lwjgl.glfw.GLFW;
 
 public class MainMenu {
@@ -29,7 +30,7 @@ public class MainMenu {
         // Create title text with dramatic scaling
         titleText = Application.CreateEntity(new TextEntity());
         titleText.GetTextRenderer().SetText("E.T. THE EXTRA-TERRESTRIAL");
-        titleText.GetTextRenderer().SetColor(new Vector3f(0.2f, 1.0f, 0.2f)); // Green color
+        titleText.GetTextRenderer().SetColor(new Vector4f(0.2f, 1.0f, 0.2f, 1.0f)); // Green color
         titleText.transform.position.x = -50; // Move to the left
         titleText.transform.position.y =40;
         titleText.transform.position.z = 100; // Make sure it's in front
@@ -38,7 +39,7 @@ public class MainMenu {
         // Create animated "Press SPACE to Start" text
         startText = Application.CreateEntity(new TextEntity());
         startText.GetTextRenderer().SetText("Press SPACE to Begin Adventure");
-        startText.GetTextRenderer().SetColor(new Vector3f(1.0f, 1.0f, 0.2f)); // Yellow color
+        startText.GetTextRenderer().SetColor(new Vector4f(1.0f, 1.0f, 0.2f, 1.0f)); // Yellow color
         startText.transform.position.y = startTextBaseY;
         startText.transform.position.z = 100; // Make sure it's in front
         startText.transform.Scale(0.6f);
@@ -46,7 +47,7 @@ public class MainMenu {
         // Add copyright text
         copyrightText = Application.CreateEntity(new TextEntity());
         copyrightText.GetTextRenderer().SetText("© 1982 ATARI INC. - REMAKE 2024");
-        copyrightText.GetTextRenderer().SetColor(new Vector3f(0.7f, 0.7f, 0.7f)); // Gray color
+        copyrightText.GetTextRenderer().SetColor(new Vector4f(0.7f, 0.7f, 0.7f, 1.0f)); // Gray color
         copyrightText.transform.position.y = -40;
         copyrightText.transform.position.z = 100; // Make sure it's in front
         copyrightText.transform.Scale(0.4f);

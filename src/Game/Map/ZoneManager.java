@@ -85,7 +85,6 @@ public class ZoneManager {
         // unload previous zone if any
         if(currentZone != null){
             currentZone.unload();
-
         }
         
         // load new zone

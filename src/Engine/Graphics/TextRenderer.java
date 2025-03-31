@@ -2,6 +2,7 @@ package Engine.Graphics;
 
 import Engine.Entities.Transform;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
@@ -17,7 +18,7 @@ public class TextRenderer implements Renderer {
     private static Shader textShader;
 
     private String text = "Hello World!";
-    private Vector3f color = new Vector3f(1, 1, 1);
+    private Vector4f color = new Vector4f(1, 1, 1, 1);
 
     private int vao = 0;
     private int vbo = 0;
@@ -53,7 +54,7 @@ public class TextRenderer implements Renderer {
         GenerateText();
     }
 
-    public void SetColor(Vector3f color){
+    public void SetColor(Vector4f color){
         this.color = color;
     }
 

@@ -8,7 +8,7 @@ import Engine.AssetManagement.AssetManager;
 import Game.ActionType;
 import Game.GameState;
 import org.joml.Vector2f;
-import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 public class ScoreDisplay extends Entity {
     private SpriteEntity container;
@@ -28,7 +28,7 @@ public class ScoreDisplay extends Entity {
         // Create container background
         container = Application.CreateEntity(new SpriteEntity());
         container.GetSpriteRenderer().sprite = AssetManager.LoadSprite("UI/score_container.png");
-        container.GetSpriteRenderer().SetColor(new Vector3f(0.2f, 0.2f, 0.2f)); // Dark gray background
+        container.GetSpriteRenderer().SetColor(new Vector4f(0.2f, 0.2f, 0.2f, 1.0f)); // Dark gray background
         container.transform.position.y = -40; // Position at bottom
         container.transform.position.z = 90; // Behind text, in front of game
         container.transform.scale = new Vector2f(160, 18); // Width of screen, 18 units tall
@@ -44,7 +44,7 @@ public class ScoreDisplay extends Entity {
         // Create controls text in the middle
         controlsText = Application.CreateEntity(new TextEntity());
         controlsText.GetTextRenderer().SetText("Press SPACE to:");
-        controlsText.GetTextRenderer().SetColor(new Vector3f(0.0f, 0.0f, 0.0f));
+        controlsText.GetTextRenderer().SetColor(new Vector4f(0.0f, 0.0f, 0.0f, 1.0f));
         controlsText.transform.position.x = -15; // Centered with icon
         controlsText.transform.position.y = -33.5f; // Match container position
         controlsText.transform.position.z = 91; // In front of container
@@ -53,7 +53,7 @@ public class ScoreDisplay extends Entity {
         // Create ability text in the middle
         abilityText = Application.CreateEntity(new TextEntity());
         abilityText.GetTextRenderer().SetText("Call Home");
-        abilityText.GetTextRenderer().SetColor(new Vector3f(0.0f, 0.0f, 0.0f));
+        abilityText.GetTextRenderer().SetColor(new Vector4f(0.0f, 0.0f, 0.0f, 1.0f));
         abilityText.transform.position.x = -10; // Centered with icon
         abilityText.transform.position.y = -37.5f; // Match container position
         abilityText.transform.position.z = 91; // In front of container
@@ -69,7 +69,7 @@ public class ScoreDisplay extends Entity {
         // Create score text on the right
         scoreText = Application.CreateEntity(new TextEntity());
         scoreText.GetTextRenderer().SetText(": " + currentScore);
-        scoreText.GetTextRenderer().SetColor(new Vector3f(1.0f, 1.0f, 1.0f));
+        scoreText.GetTextRenderer().SetColor(new Vector4f(1.0f, 1.0f, 1.0f, 1.0f));
         scoreText.transform.position.x = 60;
         scoreText.transform.position.y = -37;
         scoreText.transform.position.z = 91;
@@ -77,7 +77,7 @@ public class ScoreDisplay extends Entity {
 
         // Create stamina bar background
         staminaBarBackground = Application.CreateEntity(new SpriteEntity());
-        staminaBarBackground.GetSpriteRenderer().SetColor(new Vector3f(0.3f, 0.3f, 0.3f));
+        staminaBarBackground.GetSpriteRenderer().SetColor(new Vector4f(0.3f, 0.3f, 0.3f, 1.0f));
         staminaBarBackground.transform.position.x = 60;
         staminaBarBackground.transform.position.y = -42; // Below score text
         staminaBarBackground.transform.position.z = 91;
@@ -85,7 +85,7 @@ public class ScoreDisplay extends Entity {
 
         // Create stamina bar fill
         staminaBarFill = Application.CreateEntity(new SpriteEntity());
-        staminaBarFill.GetSpriteRenderer().SetColor(new Vector3f(0.2f, 0.8f, 0.2f)); // Green
+        staminaBarFill.GetSpriteRenderer().SetColor(new Vector4f(0.2f, 0.8f, 0.2f, 1.0f)); // Green
         staminaBarFill.transform.position.x = 60;
         staminaBarFill.transform.position.y = -42; // Match background position
         staminaBarFill.transform.position.z = 92;
@@ -133,11 +133,11 @@ public class ScoreDisplay extends Entity {
         
         // Update color based on stamina level
         if (staminaPercentage > 0.6f) {
-            staminaBarFill.GetSpriteRenderer().SetColor(new Vector3f(0.2f, 0.8f, 0.2f)); // Green
+            staminaBarFill.GetSpriteRenderer().SetColor(new Vector4f(0.2f, 0.8f, 0.2f, 1.0f)); // Green
         } else if (staminaPercentage > 0.3f) {
-            staminaBarFill.GetSpriteRenderer().SetColor(new Vector3f(0.8f, 0.8f, 0.2f)); // Yellow
+            staminaBarFill.GetSpriteRenderer().SetColor(new Vector4f(0.8f, 0.8f, 0.2f, 1.0f)); // Yellow
         } else {
-            staminaBarFill.GetSpriteRenderer().SetColor(new Vector3f(0.8f, 0.2f, 0.2f)); // Red
+            staminaBarFill.GetSpriteRenderer().SetColor(new Vector4f(0.8f, 0.2f, 0.2f, 1.0f)); // Red
         }
     }
 

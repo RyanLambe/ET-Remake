@@ -10,6 +10,7 @@ import Engine.Application;
 import Game.UI.PauseMenu;
 import org.joml.Vector3f;
 import org.joml.Math;
+import org.joml.Vector4f;
 import org.lwjgl.glfw.GLFW;
 import org.joml.Math;
 
@@ -33,7 +34,7 @@ public class Player extends SpriteEntity {
 
     private float maxStamina = 1;
     private float staminaRegenRate = .25f;
-    private float staminaMultiplier = 0.01f;
+    private float staminaMultiplier = 0.1f;
 
     private int skipFrames = 2;
 
@@ -44,7 +45,7 @@ public class Player extends SpriteEntity {
     public void Start() {
         // super.Start() is Unnecessary
 
-        GetSpriteRenderer().SetColor(new Vector3f(1, 1, 1)); // sets tint of sprite
+        GetSpriteRenderer().SetColor(new Vector4f(1, 1, 1, 1)); // sets tint of sprite
 
         walkLeft.fps = 10;
         walkRight.fps = 10;
@@ -169,6 +170,11 @@ public class Player extends SpriteEntity {
 
         if(Game.zoneManager.getCurrentZone().name.equals("RightEdge")){
             transform.position.x = Math.min(transform.position.x, 80);
+        }
+
+        // check lose game
+        if(GameState.stamina <= 0.0f){
+            Game.Lose();
         }
 
     }

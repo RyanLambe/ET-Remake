@@ -1,33 +1,19 @@
 package Game;
 
 import Engine.Application;
+import Engine.Entities.SpriteEntity;
 import Engine.Physics.Physics;
 import Game.Map.ZoneManager;
-import Game.UI.MainMenu;
-import Game.UI.PauseMenu;
-import Game.UI.ScoreDisplay;
+import Game.UI.*;
 
 public class Game {
 
-    /*public static void Start()
-    {
-        // this is an example, DO NOT use SpriteEntity Directly, SpriteEntity should be inherited from.
-        Player example = Application.CreateEntity(new Player());
-
-        // text examples
-        TextEntity text = Application.CreateEntity(new TextEntity());
-        text.transform.Scale(0.5f);
-        TextEntity text2 = Application.CreateEntity(new TextEntity());
-        text2.GetTextRenderer().SetText("How's it going?");
-        text2.transform.position.y -= 20;
-        text2.transform.position.x -= 50;
-        
-    }*/
- 
     public static ZoneManager zoneManager;
     public static Player player;
     private static MainMenu mainMenu;
     private static PauseMenu pauseMenu;
+    private static LoseScreen loseScreen;
+    private static WinScreen winScreen;
     private static ScoreDisplay scoreDisplay;
     private static boolean gameStarted = false;
     public static boolean gameLoaded = false;
@@ -39,6 +25,8 @@ public class Game {
     public static void Start() {
         // Show main menu first
         mainMenu = new MainMenu();
+        loseScreen = Application.CreateEntity(new LoseScreen());
+        winScreen = Application.CreateEntity(new WinScreen());
     }
     
     public static void Update() {
@@ -79,6 +67,37 @@ public class Game {
 
         gameLoaded = true;
     }
+
+    public static void RestartGame(){
+        gameStarted = true;
+
+        // gamestate
+        GameState.stamina = 1.0f;
+        GameState.phonePartsCollected = 0;
+        GameState.reeseCount = 0;
+        GameState.CalledHome = false;
+
+        player.transform.position.set(0, 0, 0);
+        zoneManager.loadZone("Forest");
+
+        // Create spaceship
+        Spaceship initialShip = Application.CreateEntity(new Spaceship());
+        initialShip.transform.position.set(0, 0, 0);
+
+        // AI Setup
+        scientist = new AI(false, false, 5, 90, false);
+        fbi = new AI(true, true, 3, 80, true);
+
+        gameLoaded = true;
+    }
     
     public static Player getPlayer() { return player; }
+
+    public static void Lose(){
+        loseScreen.Show();
+    }
+
+    public static void Win(){
+        winScreen.Show();
+    }
 }
