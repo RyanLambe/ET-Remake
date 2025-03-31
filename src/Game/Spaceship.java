@@ -26,13 +26,14 @@ public class Spaceship extends SpriteEntity {
         tag = "Spaceship";
 
         // Check if this is the initial launch
-        isInitialLaunch = Game.player.getPhonePieces() == 0;
+        isInitialLaunch = !GameState.CalledHome;
         if (isInitialLaunch) {
             hasLaunched = true;
             collider.enabled = false;
             hasPlayer = false; // Make sure player isn't attached
         } else {
             collider.enabled = true;
+            transform.position.y = -2000;
         }
     }
 
@@ -52,6 +53,7 @@ public class Spaceship extends SpriteEntity {
             pos += Clock.DeltaTime() * speed;
             if (hasPlayer && attachedPlayer != null) {
                 attachedPlayer.transform.position.set(transform.position.x, transform.position.y, 0);
+                attachedPlayer.lastAnimationState = Player.LastAnimationState.Down;
             }
 
             // Destroy when off screen
@@ -59,11 +61,9 @@ public class Spaceship extends SpriteEntity {
                 System.out.println("Ship destroyed");
                 if (hasPlayer) {
                     Game.zoneManager.switchZone("END"); // Switch to end game zone
-                } else if (isInitialLaunch) {
-                    Destroy();
-                } else {
-                    Destroy();
+                    Game.Win();
                 }
+                Destroy();
             }
         }
 

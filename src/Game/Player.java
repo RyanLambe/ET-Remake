@@ -27,14 +27,14 @@ public class Player extends SpriteEntity {
     private Sprite idleUp = AssetManager.LoadSprite("ET/up.png");
     private Sprite idleDown = AssetManager.LoadSprite("ET/down.png");
 
-    enum LastAnimationState {
+    public enum LastAnimationState {
         Down, Left, Right, Up,
     }
-    LastAnimationState lastAnimationState = LastAnimationState.Down;
+    public LastAnimationState lastAnimationState = LastAnimationState.Down;
 
     private float maxStamina = 1;
-    private float staminaRegenRate = .25f;
-    private float staminaMultiplier = 0.1f;
+    private float staminaRegenRate = .35f;
+    private float staminaMultiplier = 0.02f;
 
     private int skipFrames = 2;
 
@@ -57,13 +57,13 @@ public class Player extends SpriteEntity {
         tag = "Player";
         collider.enabled = true;
         escaped = false;
-        setAction(ActionType.EAT);
     }
 
     @Override
     public void Update() {
 
         checkZoneTransition();
+        UpdateAction();
 
         if (PauseMenu.isPaused || AI.isHoldingPlayer || !Game.gameLoaded) {
             GetSpriteRenderer().sprite = idleDown;
@@ -129,14 +129,13 @@ public class Player extends SpriteEntity {
                 performAction();
             }
         } else if (GameState.action == ActionType.CALL_HOME) {
-            if(Input.GetKey(GLFW.GLFW_KEY_SPACE)){
+            if(Input.GetKeyDown(GLFW.GLFW_KEY_SPACE)){
                 performAction();
             }
         } else if (GameState.action == ActionType.EAT) {
             if(Input.GetKeyDown(GLFW.GLFW_KEY_SPACE)){
                 performAction();
             }
-
         }
 
 
@@ -198,28 +197,23 @@ public class Player extends SpriteEntity {
         if (x > 80) {
             transform.position.x = -60;
             Game.zoneManager.switchZone("RIGHT");
-            setAction(ActionType.EAT);
         } else if (x < -80) {
             transform.position.x = 60;
             Game.zoneManager.switchZone("LEFT");
-            setAction(ActionType.EAT);
         }
 
         if (y > 45) {
             transform.position.y = -25;
             Game.zoneManager.switchZone("UP");
-            setAction(ActionType.EAT);
         } else if (y < -30) {
             transform.position.y = 35;
             Game.zoneManager.switchZone("DOWN");
-            setAction(ActionType.EAT);
         }
 
         if (y > 45 && Game.zoneManager.getCurrentZone().name.equals("HoleBG")) {
             System.out.println("ET Escaped!");
             Game.zoneManager.switchZone("OUT");
             transform.position.set(0, 0, 0);  // Set position immediately upon escape
-            setAction(ActionType.EAT);
         }
     }
 
@@ -289,8 +283,8 @@ public class Player extends SpriteEntity {
 
         if (GameState.phonePartsCollected >= 3) {
             System.out.println("ET is calling home! (Signal Sent)");
-            Spaceship spaceship = Application.CreateEntity(new Spaceship());
-            spaceship.transform.position.set(0, 0, 0);
+            GameState.CalledHome = true;
+            Application.CreateEntity(new Spaceship());
             GameState.phonePartsCollected = 0;
         } else {
             System.out.println("Not enough phone pieces to call home!");
@@ -298,8 +292,15 @@ public class Player extends SpriteEntity {
     }
 
     //change the current action
-    public static void setAction(ActionType action) {
-        GameState.action = action;
-        System.out.println("Action changed to: " + action);
+    public static void UpdateAction() {
+        if(Game.zoneManager.getCurrentZone().name.equals("HoleBG")){
+            GameState.action = ActionType.FLY;
+        }
+        else if(GameState.phonePartsCollected >= 3){
+            GameState.action = ActionType.CALL_HOME;
+        }
+        else{
+            GameState.action = ActionType.EAT;
+        }
     }
 }

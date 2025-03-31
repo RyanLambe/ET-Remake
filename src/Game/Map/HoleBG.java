@@ -12,12 +12,10 @@ public class HoleBG extends Zone {
     @Override
     public void addEntities() {
         System.out.println("Hole zone entities added.");
-        Game.Player.setAction(ActionType.FLY);
     }
 
     @Override
     public void removeEntities() {
         System.out.println("Hole zone entities removed.");
-        Game.Player.setAction(ActionType.NONE);
     }
 }
