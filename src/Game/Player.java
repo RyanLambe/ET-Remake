@@ -34,7 +34,7 @@ public class Player extends SpriteEntity {
 
     private float maxStamina = 1;
     private float staminaRegenRate = .35f;
-    private float staminaMultiplier = 0.01f;
+    private float staminaMultiplier = 0.02f;
 
     private int skipFrames = 2;
 
