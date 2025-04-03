@@ -22,3 +22,9 @@
 8. Paste "Assets" and "shaders" folders
 9. Double Click to Run "ET-Remake.jar"
 10. Enjoy :)
+
+## Dependencies
+***Note: Make sure your graphics drivers are up to date and have the correct settings, or you may encounter black screens or other graphics errors***
+* LWJGL
+  * OpenGL
+  * Win32
