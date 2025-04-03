@@ -1,6 +1,7 @@
 package Game.Map;
 
 import Engine.Application;
+import Engine.Clock;
 import Game.Hole;
 import Game.Reese;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class CenterRight extends Zone {
      
     public CenterRight() {
         super("CenterRight", "centerRightBG.png");
-        Random rand = new Random();
+        Random rand = new Random(System.currentTimeMillis()+2);
         int phoneHole = rand.nextInt(3);
         if(phoneHole == 0){
             hasPhone1 = true;

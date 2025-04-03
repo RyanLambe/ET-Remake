@@ -21,7 +21,7 @@ public class RightEdge extends Zone {
 
     public RightEdge() {
         super("RightEdge", "rightEdgeBG.png");
-        Random rand = new Random();
+        Random rand = new Random(System.currentTimeMillis()+4);
         int phoneHole = rand.nextInt(4);
         if(phoneHole == 0){
             hasPhone1 = true;

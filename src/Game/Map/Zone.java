@@ -11,7 +11,7 @@ public abstract class Zone {
     public ZoneBackground background;
     private String imagePath;
     protected List<Reese> spawnedReeses = new ArrayList<>();
-    protected Random random = new Random();
+    protected Random random = new Random(System.currentTimeMillis());
     protected static final float REESE_SPAWN_CHANCE = 0.3f; // 30% chance to spawn
 
     public Zone(String name, String imagePath) {
@@ -69,6 +69,9 @@ public abstract class Zone {
     public abstract void addEntities();
     public abstract void removeEntities();
 
-    
+    public void Destroy(){
+        if(background != null)
+            background.Destroy();
+    }
 
 }

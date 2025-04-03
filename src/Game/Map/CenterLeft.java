@@ -21,7 +21,7 @@ public class CenterLeft extends Zone {
 
     public CenterLeft() {
         super("CenterLeft", "centerLeftBG.png");
-        Random rand = new Random();
+        Random rand = new Random(System.currentTimeMillis()+1);
         int phoneHole = rand.nextInt(4);
         if(phoneHole == 0){
             hasPhone1 = true;

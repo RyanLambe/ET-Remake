@@ -22,7 +22,7 @@ public class LeftEdge extends Zone {
 
     public LeftEdge() {
         super("LeftEdge", "leftedgeBG.png");
-        Random rand = new Random();
+        Random rand = new Random(System.currentTimeMillis()+3);
         int phoneHole = rand.nextInt(4);
         if(phoneHole == 0){
             hasPhone1 = true;

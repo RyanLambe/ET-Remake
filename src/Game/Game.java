@@ -77,6 +77,8 @@ public class Game {
         GameState.reeseCount = 0;
         GameState.CalledHome = false;
 
+        zoneManager.Destroy();
+        zoneManager = new ZoneManager();
         player.transform.position.set(0, 0, 0);
         zoneManager.loadZone("Forest");
 

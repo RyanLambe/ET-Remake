@@ -99,4 +99,9 @@ public class ZoneManager {
     public String getLastZone(){
         return lastZone;
     }
+
+    public void Destroy(){
+        zones.values().forEach(Zone::Destroy);
+        zones = new HashMap<>();
+    }
 }

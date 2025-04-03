@@ -57,7 +57,7 @@ public class PhonePiece extends SpriteEntity {
 
     private void updatePhoneSprite() {
         switch (GameState.phonePartsCollected) {
-            case 0:
+            case 0, 3:
                 phoneSprite = AssetManager.LoadSprite("Phone1.png");
                 break;
             case 1:
@@ -65,9 +65,6 @@ public class PhonePiece extends SpriteEntity {
                 break;
             case 2:
                 phoneSprite = AssetManager.LoadSprite("Phone3.png");
-                break;
-            default:
-                phoneSprite = AssetManager.LoadSprite("PhoneComplete.png");
                 break;
         }
         GetSpriteRenderer().sprite = phoneSprite;
