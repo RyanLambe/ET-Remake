@@ -69,7 +69,10 @@ public abstract class Zone {
     public abstract void addEntities();
     public abstract void removeEntities();
 
+
     public void Destroy(){
+        removeEntities();
+        cleanupReeses();
         if(background != null)
             background.Destroy();
     }
