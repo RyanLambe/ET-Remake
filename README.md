@@ -5,11 +5,16 @@
 2. Java Development Kit (JDK) version 21 or higher
 3. Intellij IDEA
 
-## Run From Precompiled.zip
-***Note: this is file is provided on owl since the compiled binary is too large for GitHub***
-1. unzip folder
-2. Open unzipped folder
-3. Double Click to Run "ET-Remake.jar"
+## How To Run
+1. Clone Repository
+2. Double Click to Run "ET-Remake.jar"
+3. Enjoy :)
+
+## Required Files to Run:
+If you decide to move the program to a different folder these are required
+- "ET-Remake.jar"
+- "shaders" Folder
+- "Assets" Folder
 
 ## Compile from Source
 1. Clone Repository
